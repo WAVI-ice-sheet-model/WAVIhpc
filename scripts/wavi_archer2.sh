@@ -24,3 +24,13 @@ if [ `whoami` == "aleey" ] ; then
 fi
 
 
+#
+# aliases
+#
+
+alias cdw='cd ${W_ROOT}; pwd'
+alias cdwc='cd ${W_ROOT}/cases; pwd'
+alias cdws='cd ${W_ROOT}/scripts; pwd'
+alias cdwu='cd ${W_ROOT}/utilities; pwd'
+
+
