@@ -1,0 +1,146 @@
+received from SLURM IMGNAME=julia_container_v1_6.img,JDEPOT=/work/n02/n02/aleey/wavi/WAVIhpc/.julia,JOBNO=666,TIMEQSTART=1621357294
+
+signal (15): Terminated
+in expression starting at /lus/cls01095/work/n02/n02/aleey/wavi/WAVIhpc/cases/MISMIP_666/run/sub_driver.jl:12
+_new_array_ at /buildworker/worker/package_linux64/build/src/array.c:124 [inlined]
+_new_array at /buildworker/worker/package_linux64/build/src/array.c:188 [inlined]
+jl_alloc_array_2d at /buildworker/worker/package_linux64/build/src/array.c:466
+Array at ./boot.jl:450 [inlined]
+Array at ./boot.jl:458 [inlined]
+similar at ./array.jl:358 [inlined]
+* at /buildworker/worker/package_linux64/build/usr/share/julia/stdlib/v1.6/SparseArrays/src/linalg.jl:115 [inlined]
+_kronmul! at /opt/julia/packages/LinearMaps/r6i00/src/kronecker.jl:154 [inlined]
+_unsafe_mul! at /opt/julia/packages/LinearMaps/r6i00/src/kronecker.jl:173
+mul! at /opt/julia/packages/LinearMaps/r6i00/src/LinearMaps.jl:147
+* at /opt/julia/packages/LinearMaps/r6i00/src/LinearMaps.jl:114 [inlined]
+opvec at /opt/julia/packages/WAVI/So40F/src/utilities.jl:18
+op_fun at /opt/julia/packages/WAVI/So40F/src/update_velocities.jl:296 [inlined]
+* at /opt/julia/packages/LinearMaps/r6i00/src/functionmap.jl:45 [inlined]
+get_op_diag at /opt/julia/packages/WAVI/So40F/src/preconditioners.jl:88
+get_preconditioner at /opt/julia/packages/WAVI/So40F/src/preconditioners.jl:23
+update_velocities! at /opt/julia/packages/WAVI/So40F/src/update_velocities.jl:40
+update_model_velocities! at /opt/julia/packages/WAVI/So40F/src/update_state.jl:127 [inlined]
+update_state! at /opt/julia/packages/WAVI/So40F/src/update_state.jl:16
+timestep! at /opt/julia/packages/WAVI/So40F/src/run_simulation.jl:8 [inlined]
+run_simulation! at /opt/julia/packages/WAVI/So40F/src/run_simulation.jl:48
+unknown function (ip: 0x2adf457f636e)
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+driver at /lus/cls01095/work/n02/n02/aleey/wavi/WAVIhpc/cases/MISMIP_666/run/driver.jl:89
+unknown function (ip: 0x2adf188292dc)
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
+do_call at /buildworker/worker/package_linux64/build/src/interpreter.c:115
+eval_value at /buildworker/worker/package_linux64/build/src/interpreter.c:204
+eval_stmt_value at /buildworker/worker/package_linux64/build/src/interpreter.c:155 [inlined]
+eval_body at /buildworker/worker/package_linux64/build/src/interpreter.c:562
+jl_interpret_toplevel_thunk at /buildworker/worker/package_linux64/build/src/interpreter.c:670
+jl_toplevel_eval_flex at /buildworker/worker/package_linux64/build/src/toplevel.c:877
+jl_toplevel_eval_flex at /buildworker/worker/package_linux64/build/src/toplevel.c:825
+jl_toplevel_eval_in at /buildworker/worker/package_linux64/build/src/toplevel.c:929
+eval at ./boot.jl:360 [inlined]
+include_string at ./loading.jl:1094
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+_include at ./loading.jl:1148
+include at ./Base.jl:386
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+exec_options at ./client.jl:285
+_start at ./client.jl:485
+jfptr__start_34289.clone_1 at /usr/local/julia/lib/julia/sys.so (unknown line)
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
+true_main at /buildworker/worker/package_linux64/build/src/jlapi.c:560
+repl_entrypoint at /buildworker/worker/package_linux64/build/src/jlapi.c:702
+main at julia (unknown line)
+__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
+unknown function (ip: 0x4007d8)
+unknown function (ip: (nil))
+Allocations: 177829155 (Pool: 146922134; Big: 30907021); GC: 3867
+
+signal (15): Terminated
+in expression starting at /lus/cls01095/work/n02/n02/aleey/wavi/WAVIhpc/cases/MISMIP_666/run/sub_driver.jl:12
+sweep_page at /buildworker/worker/package_linux64/build/src/gc.c:1298 [inlined]
+sweep_pool_page at /buildworker/worker/package_linux64/build/src/gc.c:1385 [inlined]
+sweep_pool_pagetable0 at /buildworker/worker/package_linux64/build/src/gc.c:1405 [inlined]
+sweep_pool_pagetable1 at /buildworker/worker/package_linux64/build/src/gc.c:1425 [inlined]
+sweep_pool_pagetable at /buildworker/worker/package_linux64/build/src/gc.c:1455 [inlined]
+gc_sweep_pool at /buildworker/worker/package_linux64/build/src/gc.c:1530
+_jl_gc_collect at /buildworker/worker/package_linux64/build/src/gc.c:3148
+jl_gc_collect at /buildworker/worker/package_linux64/build/src/gc.c:3241
+maybe_collect at /buildworker/worker/package_linux64/build/src/gc.c:880 [inlined]
+jl_gc_big_alloc at /buildworker/worker/package_linux64/build/src/gc.c:945
+jl_gc_alloc_ at /buildworker/worker/package_linux64/build/src/julia_internal.h:290 [inlined]
+jl_gc_alloc at /buildworker/worker/package_linux64/build/src/gc.c:3283
+_new_array_ at /buildworker/worker/package_linux64/build/src/array.c:122 [inlined]
+_new_array at /buildworker/worker/package_linux64/build/src/array.c:188 [inlined]
+jl_alloc_array_1d at /buildworker/worker/package_linux64/build/src/array.c:459
+Array at ./boot.jl:448 [inlined]
+Array at ./boot.jl:457 [inlined]
+Array at ./boot.jl:465 [inlined]
+similar at ./abstractarray.jl:785 [inlined]
+similar at ./abstractarray.jl:784 [inlined]
+similar at ./broadcast.jl:197 [inlined]
+similar at ./broadcast.jl:196 [inlined]
+copy at ./broadcast.jl:908 [inlined]
+materialize at ./broadcast.jl:883 [inlined]
+* at /buildworker/worker/package_linux64/build/usr/share/julia/stdlib/v1.6/LinearAlgebra/src/diagonal.jl:191
+opvec at /opt/julia/packages/WAVI/So40F/src/utilities.jl:17
+op_fun at /opt/julia/packages/WAVI/So40F/src/update_velocities.jl:296 [inlined]
+* at /opt/julia/packages/LinearMaps/r6i00/src/functionmap.jl:45 [inlined]
+#gauss_seidel_smoother!#143 at /opt/julia/packages/WAVI/So40F/src/preconditioners.jl:127
+gauss_seidel_smoother!##kw at /opt/julia/packages/WAVI/So40F/src/preconditioners.jl:122
+unknown function (ip: 0x2adf457f8d98)
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+precondition! at /opt/julia/packages/WAVI/So40F/src/preconditioners.jl:64
+update_velocities! at /opt/julia/packages/WAVI/So40F/src/update_velocities.jl:41
+update_model_velocities! at /opt/julia/packages/WAVI/So40F/src/update_state.jl:127 [inlined]
+update_state! at /opt/julia/packages/WAVI/So40F/src/update_state.jl:16
+timestep! at /opt/julia/packages/WAVI/So40F/src/run_simulation.jl:8 [inlined]
+run_simulation! at /opt/julia/packages/WAVI/So40F/src/run_simulation.jl:48
+unknown function (ip: 0x2adf457f636e)
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+driver at /lus/cls01095/work/n02/n02/aleey/wavi/WAVIhpc/cases/MISMIP_666/run/driver.jl:89
+unknown function (ip: 0x2adf188292dc)
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
+do_call at /buildworker/worker/package_linux64/build/src/interpreter.c:115
+eval_value at /buildworker/worker/package_linux64/build/src/interpreter.c:204
+eval_stmt_value at /buildworker/worker/package_linux64/build/src/interpreter.c:155 [inlined]
+eval_body at /buildworker/worker/package_linux64/build/src/interpreter.c:562
+jl_interpret_toplevel_thunk at /buildworker/worker/package_linux64/build/src/interpreter.c:670
+jl_toplevel_eval_flex at /buildworker/worker/package_linux64/build/src/toplevel.c:877
+jl_toplevel_eval_flex at /buildworker/worker/package_linux64/build/src/toplevel.c:825
+jl_toplevel_eval_in at /buildworker/worker/package_linux64/build/src/toplevel.c:929
+eval at ./boot.jl:360 [inlined]
+include_string at ./loading.jl:1094
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+_include at ./loading.jl:1148
+include at ./Base.jl:386
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+exec_options at ./client.jl:285
+_start at ./client.jl:485
+jfptr__start_34289.clone_1 at /usr/local/julia/lib/julia/sys.so (unknown line)
+_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
+jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
+true_main at /buildworker/worker/package_linux64/build/src/jlapi.c:560
+repl_entrypoint at /buildworker/worker/package_linux64/build/src/jlapi.c:702
+main at julia (unknown line)
+__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
+unknown function (ip: 0x4007d8)
+unknown function (ip: (nil))
+Allocations: 177864589 (Pool: 146942918; Big: 30921671); GC: 3870
+job chain: leave_time activated, exit code 124
+job chain did not finish
+job chain: pickup from permanent checkpoint
+niter0 = 4000
+Submitted batch job 273472

@@ -1,0 +1,7 @@
+*~
+*.swp
+Manifest.toml
+.ipynb_checkpoints
+*.mat
+*.tif
+*.jld2
