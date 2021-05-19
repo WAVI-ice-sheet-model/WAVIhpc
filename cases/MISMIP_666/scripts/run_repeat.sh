@@ -11,8 +11,8 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
 #SBATCH --time=00:06:00
-#SBATCH --job-name=MIS_$JOBNO
-#SBATCH --account=$HECACC
+##SBATCH --job-name=MIS_$JOBNO
+##SBATCH --account=$HECACC
 #SBATCH --chdir=../run
 #SBATCH --no-requeue
 
@@ -114,7 +114,7 @@ elif [ $OUT == 124 ]; then
   sed -i '0,/.*niter0.*/s//'"$NITER0_LINE"'/' driver.jl
 
   #submit the next job
-  sbatch --account=n02-NES010475 --export=IMGNAME=$IMGNAME,JDEPOT=$JDEPOT,JOBNO=$JOBNO ../scripts/run_repeat.sh
+  sbatch --job-name=MIS_$JOBNO --account=n02-NES010475 --export=IMGNAME=$IMGNAME,JDEPOT=$JDEPOT,JOBNO=$JOBNO ../scripts/run_repeat.sh
 
 else
   echo 'job chain: fail, simulation died, exit code' $OUT
