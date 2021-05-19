@@ -8,7 +8,8 @@
 export W_ROOT=$WORK/wavi/WAVIhpc
 export TMPDIR=$WORK/SCRATCH
 export JDEPOT=$W_ROOT/.julia
-export IMGPATH=$W_ROOT/containers/julia_container_v1_6.img
+export IMGNAME="julia_container_v1_6.img"
+export IMGPATH=$W_ROOT/containers/${IMGNAME}
 export HECACC=n02-bas
 export HOMEUSER="`whoami`"
 export HOMEHOST=$HOMEUSER@bslcenb.nerc-bas.ac.uk   # alias to 'null' to disable rsync
