@@ -34,4 +34,8 @@ alias cdwc='cd ${W_ROOT}/cases; pwd'
 alias cdws='cd ${W_ROOT}/scripts; pwd'
 alias cdwu='cd ${W_ROOT}/utilities; pwd'
 
+#
+# path variables
+#
+export PATH=${PATH}:$W_ROOT/scripts
 
