@@ -58,8 +58,8 @@ model = Model(grid = grid,
 niter0 = 0
 dt = 0.1
 end_time = 1000.
-chkpt_freq = 100.
-pchkpt_freq = 200.
+chkpt_freq = 50.
+pchkpt_freq = 50.
 timestepping_params = TimesteppingParams(n_iter0 = niter0, 
                                          dt = dt, 
                                          end_time = end_time, 
@@ -69,12 +69,15 @@ timestepping_params = TimesteppingParams(n_iter0 = niter0,
 #
 #output parameters
 #
-outputs = (h = model.gh.h, u = model.gu.u);
-output_freq = 100.
+outputs = (h = model.gh.h,
+           u = model.gh.u,
+           v = model.gh.v)
+output_freq = 50.
 output_params = OutputParams(outputs = outputs, 
                             output_freq = output_freq,
-                            format = "mat",
-                            dump_vel = true)
+                            output_format = "mat",
+                            dump_vel = true,
+			    zip_format = "nc")
 
 #
 # assemble the simulation
