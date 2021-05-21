@@ -8,10 +8,11 @@ rm -rf $INSTALL_LOC
 mkdir $INSTALL_LOC
 
 #
-# Go to scratch location and execute
+# Go to one up from scratch location and execute
 #
-cp julia_install_wavi.jl $WORK/julia_install_wavi.jl
-cd $WORK
+mkdir -p TMPDIR 
+cp julia_install_wavi.jl $TMPDIR/../julia_install_wavi.jl
+cd $TMPDIR/..
 export SINGULARITYENV_JULIA_DEPOT_PATH="/opt/julia"
 singularity exec -B $INSTALL_LOC:/opt/julia $IMGPATH julia 
 rm julia_install_wavi.jl
