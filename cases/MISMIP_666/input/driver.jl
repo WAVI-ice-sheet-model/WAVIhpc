@@ -69,9 +69,9 @@ timestepping_params = TimesteppingParams(n_iter0 = niter0,
 #
 #output parameters
 #
-outputs = (h = model.gh.h,
-           u = model.gh.u,
-           v = model.gh.v)
+outputs = (h = model.fields.gh.h,
+           u = model.fields.gh.u,
+           v = model.fields.gh.v)
 output_freq = 50.
 output_params = OutputParams(outputs = outputs, 
                             output_freq = output_freq,
