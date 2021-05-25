@@ -56,7 +56,7 @@ RUNTIME="$(($rem_secs-180))"
 echo Will run for $RUNTIME sec >> walltime
 
 
-echo "received from SLURM"  IMGNAME=$IMGNAME,JDEPOT=$JDEPOT,JOBNO=$JOBNO,TIMEQSTART=$TIMEQSTART
+echo "received from SLURM"  HECACC=$HECACC,IMGNAME=$IMGNAME,JDEPOT=$JDEPOT,JOBNO=$JOBNO,TIMEQSTART=$TIMEQSTART
 
 # Run the job but leave 3 minutes at the end
 timeout $RUNTIME singularity exec -B ${JDEPOT}:/opt/julia ${IMGNAME} julia sub_driver.jl
@@ -114,7 +114,7 @@ elif [ $OUT == 124 ]; then
   sed -i '0,/.*niter0.*/s//'"$NITER0_LINE"'/' driver.jl
 
   #submit the next job
-  sbatch --job-name=MIS_$JOBNO --account=n02-NES010475 --export=IMGNAME=$IMGNAME,JDEPOT=$JDEPOT,JOBNO=$JOBNO ../scripts/run_repeat.sh
+  sbatch --job-name=MIS_$JOBNO --account=$HECACC --export=HECACC=$HECACC,IMGNAME=$IMGNAME,JDEPOT=$JDEPOT,JOBNO=$JOBNO ../scripts/run_repeat.sh
 
 else
   echo 'job chain: fail, simulation died, exit code' $OUT

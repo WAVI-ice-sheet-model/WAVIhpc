@@ -24,6 +24,9 @@ if [ `whoami` == "aleey" ] ; then
   export HECACC=n02-NES010475   # ENSOWAIS
 fi
 
+if [ `whoami` == "chll1" ] ; then
+  export HECACC=n02-NES010475   # ENSOWAIS
+fi
 
 #
 # aliases
