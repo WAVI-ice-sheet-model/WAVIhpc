@@ -14,6 +14,6 @@ echo Start-time `date` >> times
 # submit the job
 sbatch -J MIS_$JOBNO \
        -A $HECACC \
-       --export TIMEQSTART=$TIMEQSTART,IMGNAME=$IMGNAME,JDEPOT=$JDEPOT,JOBNO=$JOBNO,TIMEQSTART=$TIMEQSTART \
+       --export HECACC=$HECACC,TIMEQSTART=$TIMEQSTART,IMGNAME=$IMGNAME,JDEPOT=$JDEPOT,JOBNO=$JOBNO,TIMEQSTART=$TIMEQSTART \
        ./run_repeat.sh
 
