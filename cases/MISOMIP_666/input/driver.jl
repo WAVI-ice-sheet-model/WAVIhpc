@@ -104,13 +104,7 @@ timestepping_params = TimesteppingParams(n_iter0 = niter0,
                                         step_thickness = step_thickness)
 
 #### output parameters ###
-outputs = (h = model.gh.h, u = model.gh.u);
-output_freq = 0.1
-output_params = OutputParams(dump_vel = true,
-                            output_freq = output_freq, 
-                            outputs = outputs, 
-                            output_format = "mat",
-			    zip_format = "nc") 
+output_params = OutputParams(dump_vel = true)
 
 ### set up the simulation ### 
 #!! This does a pickup if niter0 >0, does not rebuild the model unless flag activated !!
