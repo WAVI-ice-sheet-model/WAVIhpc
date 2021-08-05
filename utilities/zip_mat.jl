@@ -1,5 +1,5 @@
 using WAVI
-format = "jld2"
+format = "mat"
 output_file_path = "./"
 ncoutname = "./outfile.nc"
 prefix = "outfile"
