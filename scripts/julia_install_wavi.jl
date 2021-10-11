@@ -2,4 +2,7 @@
 
 using Pkg
 #Pkg.add("Example")
+#Pkg.add(url="https://github.com/RJArthern/WAVI.jl#AlexDev")
 Pkg.add(PackageSpec(url="https://github.com/RJArthern/WAVI.jl.git", rev="AlexDev"))
+
+
