@@ -6,7 +6,7 @@ JOBNO=024
 cd ../run
 
 # copy the julia script from utilities
-cp ../../../utilities/zip_jld2.jl .
+cp ../../../utilities/zip_mat.jl .
 
 #execute the zipping script
 export SINGULARITYENV_JULIA_DEPOT_PATH="/opt/julia"
