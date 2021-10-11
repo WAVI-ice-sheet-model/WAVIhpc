@@ -13,7 +13,7 @@ export IMGPATH=$W_ROOT/containers/${IMGNAME}
 export HECACC=n02-bas
 export HOMEUSER="`whoami`"
 export W_HOMEHOST=$HOMEUSER@bslcenb.nerc-bas.ac.uk   # alias to 'null' to disable rsync
-export W_HOMEROOT="/data/oceans_output/shelf/`whoami`/WAVI"
+export W_HOMEROOT="/data/icesheet_output/`whoami`/wavi"
 
 #
 # overwrite things with individual user exceptions
