@@ -8,10 +8,11 @@ WC=$W_ROOT/cases
 
 mkdir $WC/$2
 mkdir $WC/$2/run
+mkdir $WC/$2/scripts
 
 cp -ri $WC/$1/code $WC/$2
 cp -ri $WC/$1/input $WC/$2
-cp -ri $WC/$1/scripts $WC/$2
+cp -i $WC/$1/scripts/*.sh $WC/$2/scripts/.
 
 # Changes the JOBNO in sub*.sh scripts if the two JOBIDS
 # contain an '_'
@@ -29,6 +30,5 @@ var1old=$IDstring${1:$var1u}
 var2new=$IDstring${2:$var2u}
 
 perl -pi -e "s/$var1old/$var2new/g" sub*.sh
-perl -pi -e "s/$var1old/$var2new/g" run_repeat.sh
 perl -pi -e "s/$var1old/$var2new/g" rsync*.sh
 
