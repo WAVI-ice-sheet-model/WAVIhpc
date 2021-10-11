@@ -2,3 +2,4 @@
 *.mat
 *.jld2
 *.julia
+./cases/*/run/*
