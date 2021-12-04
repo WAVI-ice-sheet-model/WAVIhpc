@@ -3,3 +3,7 @@
 *.jld2
 *.julia
 ./cases/*/run/*
+!/cases/template
+!/cases/MISMIP_666
+!/cases/MISOMIP_666
+/wavi_test/
