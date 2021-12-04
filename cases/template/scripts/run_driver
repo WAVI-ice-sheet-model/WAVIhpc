@@ -1,5 +1,9 @@
 #!/usr/bin/env julia
 
+using Pkg
+env_name = "WAVI_ENV" in keys(ENV) ? ENV["WAVI_ENV"] : "wavi_test"
+Pkg.activate(env_name)
+
 #include everything the code directory
 for f in readdir("../code")
     if f[end-2:end] == ".jl"
@@ -7,7 +11,6 @@ for f in readdir("../code")
         include(string("../code/", f))
     end
 end
-
 
 #run the driver script
 include("../input/driver.jl")
