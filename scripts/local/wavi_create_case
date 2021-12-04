@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage $0 <name> [copy_from]"
+  exit 1
+fi
+
+. scripts/common.sh
+
+NAME="$1"
+COPY_FROM="${2:-template}"
+
+if [ -d "cases/$NAME" ]; then
+  echo "$NAME already exists, abandoning"
+  exit 1
+fi
+
+cp -Rv cases/$COPY_FROM cases/$NAME
