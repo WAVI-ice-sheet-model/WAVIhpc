@@ -1,129 +1,97 @@
 using WAVI
+function driver()
 
-
-function coupled_driver()
-
-### Grid and boundary conditions ###
-#nx = 64
-#ny = 8
-#nx = 160
-nx  = 408
-ny = 42
+#
+#Grid and boundary conditions
+#
+nx = 80
+ny = 10
 nσ = 4
-#nσ = 30
 x0 = 0.0
-y0 = 0.0
-dx = 2000.0
-dy = 2000.0
-#dt_s = unset
-#dt = dt_s/(3600*24*365)
-dt = 0.1
-step_thickness=false
-
-h_mask_m=Array{Float64}(undef, nx, ny);
-read!("hmask400_40_24_2_edit.bin", h_mask_m)
-h_mask=BitArray{2}(undef, nx, ny);
-h_mask[findall(x -> x==0,h_mask_m)].=false
-h_mask[findall(x -> x==1,h_mask_m)].=true
-#Homogenous Dirichlet boundary conditions
-#u_iszero=falses(nx+1,ny)
-#u_iszero[1,:].=true
-#v_iszero=falses(nx,ny+1)
-#v_iszero[:,1].=true
-#v_iszero[:,end].=true
-
-#orginial
-u_iszero=falses(nx+1,ny)
-##u_iszero[1,:].=true
-u_iszero[9,:].=true
-u_iszero[end,:].=true
-##u_iszero[end-1,:].=true
-#u_iszero[:,1].=true #no for no slip
-#u_iszero[:,end].=true #
-v_iszero=falses(nx,ny+1)
-v_iszero[:,1].=true
-v_iszero[:,2].=true
-#v_iszero[9,:].=true
-v_iszero[:,end].=true
-v_iszero[:,end-1].=true
-v_iszero[:,end-2].=true
-#v_iszero[1,:].=true #added
-#v_iszero[end,:].=true #added
-grid = Grid(nx = nx, 
-            ny = ny,   
-            nσ = nσ, 
-            x0 = x0, 
-            y0 = y0, 
-            dx = dx, 
+y0 = -40000.0
+dx = 8000.0
+dy = 8000.0
+h_mask=trues(nx,ny)
+u_iszero = falses(nx+1,ny); u_iszero[1,:].=true
+v_iszero=falses(nx,ny+1); v_iszero[:,1].=true; v_iszero[:,end].=true
+grid = Grid(nx = nx,
+            ny = ny,
+            nσ = nσ,
+            x0 = x0,
+            y0 = y0,
+            dx = dx,
             dy = dy,
-            h_mask = h_mask, 
-            u_iszero = u_iszero, 
+            h_mask = h_mask,
+            u_iszero = u_iszero,
             v_iszero = v_iszero)
 
+#
+#Bed
+#
+bed = WAVI.mismip_plus_bed #function definition
 
-
-#Bed 
-#bed = WAVI.mismip_plus_bed #function definition (hard coded into WAVI for ease, can also read bed here)
-bed_elevation= Array{Float64}(undef, nx, ny);
-read!("bathyREAL_408.box", bed_elevation)
-bed_elevation .= ntoh.(bed_elevation)
-
+#
 #solver parameters
+#
 maxiter_picard = 1
 solver_params = SolverParams(maxiter_picard = maxiter_picard)
 
-#physical parameters
-params = Params() #because accumulation rate commented out, but would set here
+#
+#Physical parameters
+#
+default_thickness = 100.0 #set the initial condition this way
+accumulation_rate = 0.3
+params = Params(default_thickness = default_thickness,
+                accumulation_rate = accumulation_rate)
 
-#initial conditions
-starting_thickness= Array{Float64}(undef, nx, ny);
-read!("hinit400_40_24_2.box", starting_thickness)
-starting_thickness .= ntoh.(starting_thickness)
-initial_conditions = InitialConditions(initial_thickness = starting_thickness)
-
+#
 #make the model
+#
 model = Model(grid = grid,
-                    bed_elevation = bed_elevation, 
-                    params = params, 
-                    solver_params = solver_params,
-                    initial_conditions = initial_conditions)
+              bed_elevation = bed,
+              params = params,
+              solver_params = solver_params)
 
-
+#
 #timestepping parameters
 niter0 = 0 #CHANGE ME FOR A PICKUP (!! must be niter0 !!)
 step_thickness = false #default = true!
 dt = 0.1
-end_time = 5.
-chkpt_freq = 0.1
-pchkpt_freq = 0.5
-timestepping_params = TimesteppingParams(n_iter0 = niter0, 
-                                        dt = dt, 
-                                        end_time = end_time, 
-                                        chkpt_freq = chkpt_freq, 
-                                        pchkpt_freq = pchkpt_freq,
-                                        step_thickness = step_thickness)
+end_time = 1000.
+chkpt_freq = 50.
+pchkpt_freq = 50.
+timestepping_params = TimesteppingParams(
+										niter0 = niter0,
+                                        dt = dt,
+                                        end_time = end_time,
+										chkpt_freq = chkpt_freq,
+                                        pchkpt_freq = pchkpt_freq,)
 
-#### output parameters ###
-output_params = OutputParams(dump_vel = true)
+#
+#output parameters
+#
+outputs = (h = model.fields.gh.h,
+           u = model.fields.gh.u,
+           v = model.fields.gh.v)
+output_freq = 50.
+output_params = OutputParams(outputs = outputs,
+                            output_freq = output_freq,
+                            output_format = "mat",
+                            dump_vel = true,
+			    zip_format = "nc")
 
-### set up the simulation ### 
-#!! This does a pickup if niter0 >0, does not rebuild the model unless flag activated !!
-simulation = Simulation(model = model, 
-                        timestepping_params = timestepping_params, 
+#
+# assemble the simulation
+#
+simulation = Simulation(model = model,
+                        timestepping_params = timestepping_params,
                         output_params = output_params)
 
-### set the thickness if we're doing a pickup
-if niter0 > 0
-    thickness_file= Array{Float64}(undef, simulation.model.grid.nx, simulation.model.grid.ny);
-    read!(string("Streamice_Thickness_out.data"), thickness_file)
-    thickness_file .= ntoh.(thickness_file)
-    simulation = @set simulation.model.gh.h = thickness_file
-end
-
-### run the simulation ###
+#
+#perform the simulation
+#
 run_simulation!(simulation)
-return nothing
+
+return simulation
 
 end
-
-coupled_driver()
