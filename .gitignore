@@ -2,8 +2,9 @@
 *.mat
 *.jld2
 *.julia
-./cases/*/run/*
+/cases/*/run/*
 !/cases/template
 !/cases/MISMIP_666
 !/cases/MISOMIP_666
+/cases/*
 /wavi_test/
