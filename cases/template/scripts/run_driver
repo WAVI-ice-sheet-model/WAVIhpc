@@ -13,5 +13,5 @@ for f in readdir("../code")
 end
 
 #run the driver script
-include("../input/driver.jl")
+include("driver.jl")
 driver()

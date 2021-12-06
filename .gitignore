@@ -3,8 +3,11 @@
 *.jld2
 *.julia
 /cases/*/run/*
+!/cases/ensemble_template/
 !/cases/template
 !/cases/MISMIP_666
 !/cases/MISOMIP_666
 /cases/*
+/logs/
+/venv/
 /wavi_test/

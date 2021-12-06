@@ -26,7 +26,6 @@ export PATH="`realpath ..`/scripts:$PATH"
 
 prep_run
 
-#timeout 10 run_driver
 run_driver
 RETCODE=$?
 echo "Julia process returned: $RETCODE"
