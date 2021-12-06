@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+
+if [ ! -d venv ]; then
+  if [ $( python3 --version 2>&1 | sed -r 's/^.+ 3\.([0-9]+)\..+$/\1/' ) -lt 7 ]; then
+    echo "You need to be running python3 at least of version 3.7"
+    exit 1
+  fi
+
+  echo "Setting up a python environment for model ensembler"
+  python3 -m venv venv
+  source venv/bin/activate
+
+  pip install --upgrade pip setuptools
+  pip install model_ensembler
+else
+  source venv/bin/activate
+fi
+
+CFG_DIR="`dirname $0`"
+ENSEMBLE_TARGET="slurm"
+
+if [ "`basename $CFG_DIR`" == "local" ]; then
+  ENSEMBLE_TARGET="dummy"
+fi
+
+model_ensemble -p -v $CFG_DIR/ensemble.yaml $ENSEMBLE_TARGET
+
+exit $?

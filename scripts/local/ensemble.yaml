@@ -1,0 +1,32 @@
+---
+ensemble:
+  vars:                 {}
+
+  pre_process:          []
+  post_process:         []
+
+  batch_config:
+    templatedir:  ensemble_template
+    templates:
+      - input/driver.jl.j2
+    email:        jambyr@bas.ac.uk
+    job_file:     scripts/run_member
+    cluster:      short
+    nodes:        1
+    ntasks:       8
+    length:       00:01:00
+    maxruns:      4
+    maxjobs:      2
+
+  batches:
+    - name:       local_ensemble
+      basedir:    ./cases
+      pre_batch:  []
+      pre_run:    []
+      runs:
+        - thickness:  42.0
+        - thickness:  142.0
+        - thickness:  242.0
+        - thickness:  342.0
+      post_run:     []
+      post_batch:   []

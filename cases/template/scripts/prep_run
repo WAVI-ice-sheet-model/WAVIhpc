@@ -6,18 +6,18 @@ if [ $( basename `pwd` ) != "run" ]; then
   echo "This should be a directory called run, under the case folder"
   exit 1
 else
-  rm *
+  rm -v *
 fi
 
 # Link everything from the input directory
 ln -s ../input/* .
 
 # Proper copy of the driver file
-rm -f driver.jl
+rm -fv driver.jl
 cp -f ../input/driver.jl .
 
 # Deep copy of any pickups (so they don't get overwritten in input/)
-rm -f pickup*
-cp -f ../input/pickup* . 2>/dev/null
+rm -fv pickup*
+cp -fv ../input/pickup* . 2>/dev/null
 
 ln -s ../../../${WAVI_ENV:-wavi_test}
