@@ -15,4 +15,4 @@ if [ -d "cases/$NAME" ]; then
   exit 1
 fi
 
-cp -Rv cases/$COPY_FROM cases/$NAME
+cp -RLv cases/$COPY_FROM cases/$NAME
