@@ -3,8 +3,8 @@
 *.jld2
 *.julia
 /*.yaml
+!/cases/*/run/README.md
 /cases/*/run/*
-/cases/local_ensemble-*/
 /logs/
 /venv/
 /wavi_test/

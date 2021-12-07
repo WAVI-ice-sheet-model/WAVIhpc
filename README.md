@@ -10,6 +10,13 @@ Extended to support execution in single mode and ensemble mode on the following 
 
 # Usage
 
+At present, prior to the wavi_install command, I run the following:
+
+```bash
+export WAVI_REPO="git@github.com:RJArthern/WAVI.jl.git"
+export WAVI_REV="AlexDev"
+```
+
 ## local
 
 ```bash
@@ -29,8 +36,18 @@ wavi_ensemble test_ensemble anewcase
 
 ## BAS
 
+Make sure you set JULIA_DEPOT_PATH for package storage, in your shells *rc file:
+
+```
+export JULIA_DEPOT_PATH="/data/hpcdata/users/<me>/.julia:$JULIA_DEPOT_PATH"
+```
+
+Then
+
 ```bash
-export PATH="`realpath .`/scripts/local:$PATH"
+cd <directoryOfRepo>
+export PATH="`realpath .`/scripts/BAS:$PATH"
+module load hpc/julia/1.6.2
 wavi_install
 wavi_create_case anewcase template_bas
 wavi_ensemble test_ensemble anewcase
