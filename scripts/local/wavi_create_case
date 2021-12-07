@@ -16,3 +16,5 @@ if [ -d "cases/$NAME" ]; then
 fi
 
 cp -RLv cases/$COPY_FROM cases/$NAME
+ln -s cases/$NAME/input/driver.jl cases/$NAME/input/driver.jl.j2
+ln -s cases/$NAME/scripts/run_ensemble_member cases/$NAME/input/run_ensemble_member.j2

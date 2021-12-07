@@ -27,7 +27,7 @@ CFG_DIR="`dirname $0`"
 ENSEMBLE_TARGET="slurm"
 ENSEMBLE_NAME="${1}"
 ENSEMBLE_TEMPLATE_CASE="${2:-template}"
-
+ENSEMBLE_CONFIG="cases/${ENSEMBLE_TEMPLATE_CASE}/ensemble/${ENSEMBLE_NAME}.yaml"
 if [ "$ENSEMBLE_TYPE" == "local" ]; then
   ENSEMBLE_TARGET="dummy"
 fi
@@ -36,11 +36,11 @@ sed -r \
   -e "s/NAME/${ENSEMBLE_NAME}/g" \
   -e "s/TEMPLATE/${ENSEMBLE_TEMPLATE_CASE}/g" \
   cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/template.yaml \
-  >cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/${ENSEMBLE_NAME}.yaml
+  >${ENSEMBLE_CONFIG}
 
-until check_timeout_statuses "local_ensemble-*"; do
+until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
   echo "Running another ensemble, individual runs timed out"
-  model_ensemble -p -v ${ENSEMBLE_NAME}.yaml $ENSEMBLE_TARGET
+  model_ensemble -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
 done
 
 exit $?
