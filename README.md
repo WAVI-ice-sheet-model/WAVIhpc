@@ -50,6 +50,7 @@ export PATH="`realpath .`/scripts/BAS:$PATH"
 module load hpc/julia/1.6.2
 wavi_install
 wavi_create_case anewcase template_bas
+module load hpc/python/conda-python-3.7.3
 wavi_ensemble test_ensemble anewcase
 ```
 

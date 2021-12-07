@@ -9,6 +9,7 @@ ensemble:
     templatedir:  TEMPLATE
     templates:
       - input/driver.jl.j2
+      - input/scripts/run_ensemble_member.j2
     email:        jambyr@bas.ac.uk
     job_file:     scripts/run_ensemble_member
     cluster:      short
@@ -22,10 +23,10 @@ ensemble:
     - name:       NAME
       basedir:    ./cases
       pre_batch:  []
-      pre_run:    
+      pre_run:
         - name:   execute
           args:
-            cmd:  /bin/ln -s ../../../scripts/BAS/pre_run.sh
+            cmd:  /bin/ln -s ../../scripts/BAS/pre_run.sh
       runs:
         - {}
         - {}
