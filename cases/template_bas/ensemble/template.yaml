@@ -9,7 +9,7 @@ ensemble:
     templatedir:  TEMPLATE
     templates:
       - input/driver.jl.j2
-      - input/scripts/run_ensemble_member.j2
+      - scripts/run_ensemble_member.j2
     email:        jambyr@bas.ac.uk
     job_file:     scripts/run_ensemble_member
     cluster:      short
