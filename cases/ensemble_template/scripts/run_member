@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+NAME="basename `realpath .`"
+RUNDIR="run"
+WAVI_ENV="${2:-}"
+
+if [ ! -z "$WAVI_ENV" ]; then
+  export WAVI_ENV
+fi
+
+cd $RUNDIR
+
+if [ -f COMPLETED ]; then
+  echo "Run already registered as completed, skipping"
+  exit 0
+fi
+
+export PATH="`realpath ..`/scripts:$PATH"
+
+if [ ! -f LAST_EXIT ]; then
+  prep_run
+else
+  LAST_EXIT_CODE=`cat LAST_EXIT`
+
+  if [ $LAST_EXIT_CODE -ne 124 ]; then
+    echo "Not a pickup next run exit code from last run"
+    exit 0
+  fi
+
+  if ! ls PChkpt_*.jld2 1> /dev/null 2>&1 ; then
+    echo 'job chain: fail, no pickup files'
+    exit 1
+  fi
+  for file in PChkpt_*.jld2; do
+    [[ $file -nt $PICKUP_FILE ]] && PICKUP_FILE=$file
+  done
+  # Extract the middle bit of this filename
+  PICKUP=${PICKUP_FILE#PChkpt_}
+  PICKUP=${PICKUP%.jld2}
+
+  re='^[0-9]+$'
+  if [[ $PICKUP =~ $re ]]; then
+    echo 'job chain: pickup from permanent checkpoint'
+
+    # Save the timestep, with any leading zeros removed
+    NITER0=$(echo $PICKUP | sed 's/^0*//')
+  else
+    echo 'job chain: fail, problem w pickup (WAVI only currently supports pCkpt pickups)' $PICKUP
+    exit 1
+  fi
+
+  #edit the driver namelist: replace the first instance of niter0 = * with appropriate checkpoint number
+  NITER0_LINE="niter0 = $NITER0"
+  echo $NITER0_LINE
+  sed -i '0,/.*niter0.*/s//'"$NITER0_LINE"'/' driver.jl
+fi
+
+timeout 180 run_driver >proc.${PICKUP:-0}.log 2>&1
+RETCODE=$?
+echo "Julia process returned: $RETCODE"
+echo -n "$RETCODE" >LAST_EXIT
+
+exit 0

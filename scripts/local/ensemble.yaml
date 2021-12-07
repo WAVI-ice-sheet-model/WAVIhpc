@@ -16,10 +16,10 @@ ensemble:
     ntasks:       8
     length:       00:01:00
     maxruns:      4
-    maxjobs:      2
+    maxjobs:      4
 
   batches:
-    - name:       local_ensemble
+    - name:       NAME
       basedir:    ./cases
       pre_batch:  []
       pre_run:    []
@@ -27,6 +27,8 @@ ensemble:
         - thickness:  42.0
         - thickness:  142.0
         - thickness:  242.0
-        - thickness:  342.0
-      post_run:     []
+      post_run:
+        - name:   execute
+          args:
+            cmd:  /usr/bin/touch COMPLETED
       post_batch:   []

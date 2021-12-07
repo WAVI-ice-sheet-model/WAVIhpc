@@ -18,11 +18,19 @@ fi
 
 CFG_DIR="`dirname $0`"
 ENSEMBLE_TARGET="slurm"
+ENSEMBLE_NAME="${1:-local_ensemble}"
+ENSEMBLE_TYPE="`basename $CFG_DIR`"
 
-if [ "`basename $CFG_DIR`" == "local" ]; then
+if [ "$ENSEMBLE_TYPE" == "local" ]; then
   ENSEMBLE_TARGET="dummy"
 fi
 
-model_ensemble -p -v $CFG_DIR/ensemble.yaml $ENSEMBLE_TARGET
+sed -r "s/NAME/${ENSEMBLE_NAME}/g" \
+  scripts/$ENSEMBLE_TYPE/ensemble.yaml >${ENSEMBLE_NAME}.yaml
+
+until check_timeout_statuses "local_ensemble-*"; do
+  echo "Running another ensemble, individual runs timed out"
+  model_ensemble -p -v ${ENSEMBLE_NAME}.yaml $ENSEMBLE_TARGET
+done
 
 exit $?

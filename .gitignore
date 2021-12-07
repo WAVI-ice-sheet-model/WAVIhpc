@@ -2,12 +2,9 @@
 *.mat
 *.jld2
 *.julia
+/*.yaml
 /cases/*/run/*
-!/cases/ensemble_template/
-!/cases/template
-!/cases/MISMIP_666
-!/cases/MISOMIP_666
-/cases/*
+/cases/local_ensemble-*/
 /logs/
 /venv/
 /wavi_test/
