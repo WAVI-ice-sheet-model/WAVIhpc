@@ -39,7 +39,7 @@ solver_params = SolverParams(maxiter_picard = maxiter_picard)
 #
 #Physical parameters
 #
-default_thickness = 100.0 #set the initial condition this way
+default_thickness = 100.0
 accumulation_rate = 0.3
 params = Params(default_thickness = default_thickness,
                 accumulation_rate = accumulation_rate)
@@ -61,10 +61,10 @@ end_time = 1000.
 chkpt_freq = 50.
 pchkpt_freq = 50.
 timestepping_params = TimesteppingParams(
-										niter0 = niter0,
+                                        niter0 = niter0,
                                         dt = dt,
                                         end_time = end_time,
-										chkpt_freq = chkpt_freq,
+                                        chkpt_freq = chkpt_freq,
                                         pchkpt_freq = pchkpt_freq,)
 
 #
@@ -78,7 +78,7 @@ output_params = OutputParams(outputs = outputs,
                             output_freq = output_freq,
                             output_format = "mat",
                             dump_vel = true,
-			    zip_format = "nc")
+          zip_format = "nc")
 
 #
 # assemble the simulation

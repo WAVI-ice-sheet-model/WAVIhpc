@@ -1,11 +1,24 @@
 #!/usr/bin/env bash
+#SBATCH --output={{ run.dir }}/job.%j.%N.out
+#SBATCH --error={{ run.dir }}/job.%j.%N.err
+#SBATCH --chdir={{ run.dir }}
+#SBATCH --mail-type=begin,end,fail,requeue
+#SBATCH --mail-user={{ run.email }}
+#SBATCH --time={{ run.length }}
+#SBATCH --job-name={{ run.id }}
+#SBATCH --nodes={{ run.nodes }}
+#SBATCH --partition={{ run.cluster }}
+#SBATCH --account={{ run.cluster }}
+#SBATCH --cpus-per-task={{ run.ntasks }}
+#SBATCH --mem=64gb
 
-NAME="basename `realpath .`"
+CWD="`realpath .`"
+NAME="basename $CWD"
 RUNDIR="run"
-WAVI_ENV="${2:-}"
 
-if [ ! -z "$WAVI_ENV" ]; then
-  export WAVI_ENV
+if [ -x ./pre_run.sh ]; then
+  echo "Pre-run script found, running"
+  . pre_run.sh
 fi
 
 cd $RUNDIR
@@ -55,9 +68,13 @@ else
   sed -i '0,/.*niter0.*/s//'"$NITER0_LINE"'/' driver.jl
 fi
 
-timeout 180 run_driver >proc.${PICKUP:-0}.log 2>&1
+run_driver >proc.${PICKUP:-0}.log 2>&1
 RETCODE=$?
 echo "Julia process returned: $RETCODE"
 echo -n "$RETCODE" >LAST_EXIT
+
+if [ -x ./post_run.sh ]; then
+  . post_run.sh
+fi
 
 exit 0

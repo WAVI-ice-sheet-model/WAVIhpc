@@ -1,0 +1,37 @@
+---
+ensemble:
+  vars:                 {}
+
+  pre_process:          []
+  post_process:         []
+
+  batch_config:
+    templatedir:  TEMPLATE
+    templates:
+      - input/driver.jl.j2
+    email:        jambyr@bas.ac.uk
+    job_file:     scripts/run_ensemble_member
+    cluster:      short
+    nodes:        1
+    ntasks:       8
+    length:       00:03:00
+    maxruns:      4
+    maxjobs:      4
+
+  batches:
+    - name:       NAME
+      basedir:    ./cases
+      pre_batch:  []
+      pre_run:    
+        - name:   execute
+          args:
+            cmd:  /bin/ln -s ../../../scripts/BAS/pre_run.sh
+      runs:
+        - {}
+        - {}
+        - {}
+      post_run:
+        - name:   execute
+          args:
+            cmd:  /usr/bin/touch COMPLETED
+      post_batch:   []
