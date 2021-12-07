@@ -1,5 +1,12 @@
 #!/usr/bin/bash
 
+if [ $# -lt 1 ]; then
+  echo "Usage $0 <ensembleName> [ensembleTemplateCase]"
+  exit 1
+fi
+
+. scripts/common.sh
+
 if [ ! -d venv ]; then
   if [ $( python3 --version 2>&1 | sed -r 's/^.+ 3\.([0-9]+)\..+$/\1/' ) -lt 7 ]; then
     echo "You need to be running python3 at least of version 3.7"
@@ -18,15 +25,18 @@ fi
 
 CFG_DIR="`dirname $0`"
 ENSEMBLE_TARGET="slurm"
-ENSEMBLE_NAME="${1:-local_ensemble}"
-ENSEMBLE_TYPE="`basename $CFG_DIR`"
+ENSEMBLE_NAME="${1}"
+ENSEMBLE_TEMPLATE_CASE="${2:-template}"
 
 if [ "$ENSEMBLE_TYPE" == "local" ]; then
   ENSEMBLE_TARGET="dummy"
 fi
 
-sed -r "s/NAME/${ENSEMBLE_NAME}/g" \
-  scripts/$ENSEMBLE_TYPE/ensemble.yaml >${ENSEMBLE_NAME}.yaml
+sed -r \
+  -e "s/NAME/${ENSEMBLE_NAME}/g" \
+  -e "s/TEMPLATE/${ENSEMBLE_TEMPLATE_CASE}/g" \
+  cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/template.yaml \
+  >cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/${ENSEMBLE_NAME}.yaml
 
 until check_timeout_statuses "local_ensemble-*"; do
   echo "Running another ensemble, individual runs timed out"

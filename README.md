@@ -10,22 +10,36 @@ Extended to support execution in single mode and ensemble mode on the following 
 
 # Usage
 
-## local/BAS
+## local
 
 ```bash
-# In the root of the repository, set the appropriate root (local/archer/BAS)
-
 export PATH="`realpath .`/scripts/local:$PATH"
 wavi_install
-wavi_create_case anewcase
 
 # Either
+wavi_create_case anewcase
 wavi_execute anewcase
 
 # Or run five WAVIs in an ensemble
-wavi_ensemble anewcase 5
+wavi_create_case anewcase
+wavi_ensemble test_ensemble anewcase
+```
+
+**Still need to sort out ensemble configurations on a case by case basis, I defaulted to putting them in the scripts dir by accident...**
+
+## BAS
+
+```bash
+export PATH="`realpath .`/scripts/local:$PATH"
+wavi_install
+wavi_create_case anewcase template_bas
+wavi_ensemble test_ensemble anewcase
 ```
 
 ## Archer2
+
+```bash
+export PATH="`realpath .`/scripts/archer:$PATH"
+```
 
 TODO: clarify workflow with Alex / gain access and retest

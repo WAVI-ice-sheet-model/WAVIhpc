@@ -6,6 +6,7 @@ if [ $( basename `pwd` ) != "run" ]; then
   echo "This should be a directory called run, under the case folder"
   exit 1
 else
+  echo "Cleaning run directory"
   rm -v *
 fi
 
