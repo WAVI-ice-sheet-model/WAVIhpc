@@ -31,8 +31,5 @@ ensemble:
         - {}
         - {}
         - {}
-      post_run:
-        - name:   execute
-          args:
-            cmd:  /usr/bin/touch COMPLETED
+      post_run:     []
       post_batch:   []

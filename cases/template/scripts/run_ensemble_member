@@ -23,11 +23,6 @@ fi
 
 cd $RUNDIR
 
-if [ -f COMPLETED ]; then
-  echo "Run already registered as completed, skipping"
-  exit 0
-fi
-
 export PATH="`realpath ..`/scripts:$PATH"
 
 if [ ! -f LAST_EXIT ]; then
