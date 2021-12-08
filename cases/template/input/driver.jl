@@ -4,13 +4,13 @@ function driver()
 #
 #Grid and boundary conditions
 #
-nx = 80
-ny = 10
+nx = 640
+ny = 80
 nσ = 4
 x0 = 0.0
 y0 = -40000.0
-dx = 8000.0
-dy = 8000.0
+dx = 1000.0
+dy = 1000.0
 h_mask=trues(nx,ny)
 u_iszero = falses(nx+1,ny); u_iszero[1,:].=true
 v_iszero=falses(nx,ny+1); v_iszero[:,1].=true; v_iszero[:,end].=true
@@ -39,8 +39,8 @@ solver_params = SolverParams(maxiter_picard = maxiter_picard)
 #
 #Physical parameters
 #
-default_thickness = 100.0
-accumulation_rate = 0.3
+default_thickness = {{ run.thickness }}
+accumulation_rate = {{ run.accumulation }}
 params = Params(default_thickness = default_thickness,
                 accumulation_rate = accumulation_rate)
 
@@ -58,8 +58,8 @@ niter0 = 0 #CHANGE ME FOR A PICKUP (!! must be niter0 !!)
 step_thickness = false #default = true!
 dt = 0.1
 end_time = 1000.
-chkpt_freq = 50.
-pchkpt_freq = 50.
+chkpt_freq = 1.
+pchkpt_freq = 1.
 timestepping_params = TimesteppingParams(
                                         niter0 = niter0,
                                         dt = dt,
