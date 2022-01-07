@@ -37,8 +37,12 @@ else
 
   if ! ls PChkpt_*.jld2 1> /dev/null 2>&1 ; then
     echo 'job chain: fail, no pickup files'
+    echo "1" >LAST_EXIT
     exit 1
+  else
+    rm -v LAST_EXIT
   fi
+
   for file in PChkpt_*.jld2; do
     [[ $file -nt $PICKUP_FILE ]] && PICKUP_FILE=$file
   done

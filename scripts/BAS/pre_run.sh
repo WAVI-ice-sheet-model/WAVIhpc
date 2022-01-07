@@ -29,6 +29,20 @@ wait_term()
         kill -TERM "${term_child_pid}" 2>/dev/null 
     fi
     wait ${term_child_pid} 2>/dev/null
+    
+    CHILD_EXIT=$?
+    # In theory this will only exist already if handle_term has processed
+    if [ ! -f LAST_EXIT ]; then
+        echo "$JULIA_EXIT" >LAST_EXIT
+    fi
+
     trap - TERM INT
+
     wait ${term_child_pid} 2>/dev/null
+
+    CHILD_EXIT=$?
+    # In theory this will only exist already if handle_term has processed
+    if [ ! -f LAST_EXIT ]; then
+        echo "$JULIA_EXIT" >LAST_EXIT
+    fi
 }
