@@ -1,0 +1,1 @@
+../../template/scripts/README.md
