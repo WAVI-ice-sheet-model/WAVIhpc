@@ -4,7 +4,6 @@
 #SBATCH --chdir={{ run.dir }}
 #SBATCH --mail-type=begin,end,fail,requeue
 #SBATCH --mail-user={{ run.email }}
-#SBATCH --time={{ run.length }}
 #SBATCH --job-name={{ run.id }}
 #SBATCH --nodes={{ run.nodes }}
 #SBATCH --partition={{ run.cluster }}
