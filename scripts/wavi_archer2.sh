@@ -23,11 +23,8 @@ export W_HOMEROOT="/data/icesheet_output/`whoami`/wavi"
 
 if [ `whoami` == "aleey" ] ; then
   #export ROOTDIR=$JDEPOT/.julia_c2
-  export HECACC=n02-NES010475   # ENSOWAIS
 fi
-
 if [ `whoami` == "chll1" ] ; then
-  export HECACC=n02-NES010475   # ENSOWAIS
 fi
 
 #
