@@ -20,3 +20,4 @@ singularity exec -B $INSTALL_LOC:/opt/julia,$(pwd) $IMGPATH julia julia_install_
 rm julia_install_wavi.jl
 echo "returning to $W_ROOT/scripts..."
 cd $W_ROOT/scripts/
+
