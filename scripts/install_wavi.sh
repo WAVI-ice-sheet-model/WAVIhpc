@@ -6,14 +6,17 @@
 INSTALL_LOC=$W_ROOT/.julia
 rm -rf $INSTALL_LOC
 mkdir $INSTALL_LOC
+echo "About to start installing wavi in $INSTALL_LOC"
 
 #
-# Go to scratch location and execute
+# Go to one up from scratch location and execute
 #
-mkdir -p TMPDIR
+#mkdir -p TMPDIR 
+echo "moving to $TMPDIR for the installation"
 cp julia_install_wavi.jl $TMPDIR/../julia_install_wavi.jl
 cd $TMPDIR/..
 export SINGULARITYENV_JULIA_DEPOT_PATH="/opt/julia"
-singularity exec -B $INSTALL_LOC:/opt/julia $IMGPATH julia julia_install_wavi.jl
+singularity exec -B $INSTALL_LOC:/opt/julia,$(pwd) $IMGPATH julia julia_install_wavi.jl
 rm julia_install_wavi.jl
+echo "returning to $W_ROOT/scripts..."
 cd $W_ROOT/scripts/
