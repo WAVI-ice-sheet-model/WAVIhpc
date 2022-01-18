@@ -16,7 +16,7 @@ echo "Looking at $CASE_SOURCE"
 FIND_RESULTS=$( find $CASE_SOURCE -name 'LAST_EXIT' )
 FIND_EXIT=$?
 
-if [ $FIND_EXIT == 1 ]; then exit 0; fi
+if [ $FIND_EXIT -ne 0 ]; then exit $FIND_EXIT; fi
 
 for EXIT_FILE in $FIND_RESULTS; do
   EXIT_STATUS=`cat $EXIT_FILE`
