@@ -1,4 +1,4 @@
-# WAVI on ARCHER2 configuration script. Created by Alex Bradley (aleey@bas.ac.uk) on 12/5/21
+# WAVI on ARCHER2 configuration script. Created by Alex Bradley (aleey@bas.ac.uk) on 12/5/21 for ARCHER4cabinet system. Updated by Alex Bradley for ARCHER2 full system on 18/01/22
 #!/bin/bash
 
 #
@@ -6,6 +6,8 @@
 #
 
 export W_ROOT=$WORK/wavi/WAVIhpc
+export W_CASES=$W_ROOT/cases/     #for binding to singularity at run time
+export MNT_CASES=/mnt/lustre/a2fs-work2/$W_CASES/ #fix by David Bett (davbet33@bas.ac.uk) for ARCHER2 bind mount problems
 export TMPDIR=$WORK/SCRATCH
 export JDEPOT=$W_ROOT/.julia
 export IMGNAME="julia_container_v1_6.img"
