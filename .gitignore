@@ -2,6 +2,7 @@
 *.mat
 *.jld2
 *.julia
+.vscode/
 /*.yaml
 !/cases/*/run/README.md
 /cases/*/run/*
