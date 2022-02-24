@@ -22,6 +22,7 @@ for EXIT_FILE in $FIND_RESULTS; do
   EXIT_STATUS=`cat $EXIT_FILE`
   echo "$EXIT_FILE has exit status $EXIT_STATUS"
 
+  [ -z "$EXIT_STATUS" ] && EXIT_STATUS=0
   if [ $EXIT_STATUS -ne 0 ] && [ $EXIT_STATUS -ne 124 ]; then
     echo "Non-timeout status $EXIT_STATUS changing to 0"
     EXIT_STATUS=0
@@ -29,6 +30,7 @@ for EXIT_FILE in $FIND_RESULTS; do
   EXIT_VALUES=`expr $EXIT_VALUES \+ $EXIT_STATUS`
 done
 
+[ -z "$EXIT_VALUES" ] && EXIT_VALUES=0
 TIMEOUT_STATUSES=`expr $EXIT_VALUES / 124`
 echo "Timeout statuses: $TIMEOUT_STATUSES"
 
