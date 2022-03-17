@@ -12,6 +12,9 @@
 #SBATCH --mem=8gb
 #SBATCH --signal=B:SIGINT@60
 
+# TODO: this logic is better in the ensemble run items, only to align to
+# previous approach have I ended up implementing it here, but it's growing :(
+
 CWD="`realpath .`"
 NAME="basename $CWD"
 RUNDIR="run"
@@ -25,7 +28,39 @@ cd $RUNDIR
 
 export PATH="`realpath ..`/scripts:$PATH"
 
+# We need to protect against previous incarnations of the job that have been
+# SIGKILL'd from destroying the cached data.
+# If we detect a sign of SIGKILL in the previous job, let's assume to create a
+# LAST_EXIT file and preserve the previous incarnation of the run directory
+if ls -tr ../job.*.*.out >/dev/null 2>&1; then
+  LAST_RUNLOG=`ls -tr ../job.*.*.out | tail -n 1`
+  LAST_JOBNO=`echo $LAST_RUNLOG | awk -F. '{ print $2 }'`
+  LAST_STATE=`sacct -nP -o state,exitcode -j ${LAST_JOBNO}.batch`
+
+  if [ `echo $LAST_STATE` == "CANCELLED|0:9" ]; then
+    echo "We have a brutal previous status for $LAST_JOBNO so we're assuming
+we need to set this to be picked up. It may fail if this is actually a new run
+or failed for another reason." | mail -s "SIGKILL notification" {{ run.email }}
+    echo -n "124">LAST_EXIT
+  fi
+fi
+
 if [ ! -f LAST_EXIT ]; then
+  if ls -d ../bak.run.*/ >/dev/null 2>&1; then
+    echo "Cleaning out old backup directories..."
+    rm -rv ../bak.run.*/
+  fi
+
+  if ls -tr ../job.*.*.out >/dev/null 2>&1; then
+    LAST_RUNLOG=`ls -tr ../job.*.*.out | tail -n 1`
+    LAST_JOBNO=`echo $LAST_RUNLOG | awk -F. '{ print $2 }'`
+
+    echo "We have previous job logs from $LAST_JOBNO but no LAST_EXIT. I have
+    saved into bak.run.$LAST_JOBNO but will prep the run. Please intervene or
+    contact devs if necessary" | mail -s "Backup notification" {{ run.email }}
+    rsync -avh ../run/ ../bak.run.${LAST_JOBNO}/
+  fi
+
   prep_run
 else
   LAST_EXIT_CODE=`cat LAST_EXIT`
@@ -70,7 +105,7 @@ fi
 
 prep_term
 run_driver 2>&1 >proc.${PICKUP:-0}.log &
- 
+
 wait_term
 
 if [ -x ./post_run.sh ]; then
