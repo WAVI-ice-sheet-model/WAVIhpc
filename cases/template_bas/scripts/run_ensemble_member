@@ -32,9 +32,9 @@ export PATH="`realpath ..`/scripts:$PATH"
 # SIGKILL'd from destroying the cached data.
 # If we detect a sign of SIGKILL in the previous job, let's assume to create a
 # LAST_EXIT file and preserve the previous incarnation of the run directory
-if ls -tr ../job.*.*.out >/dev/null 2>&1; then
-  LAST_RUNLOG=`ls -tr ../job.*.*.out | tail -n 1`
-  LAST_JOBNO=`echo $LAST_RUNLOG | awk -F. '{ print $2 }'`
+if ls -tr ../job.*.*.out | grep -v $SLURM_JOB_ID >/dev/null 2>&1; then
+  LAST_RUNLOG=`ls -tr ../job.*.*.out | grep -v $SLURM_JOB_ID | tail -n 1`
+  LAST_JOBNO=`echo $( basename $LAST_RUNLOG ) | awk -F. '{ print $2 }'`
   LAST_STATE=`sacct -nP -o state,exitcode -j ${LAST_JOBNO}.batch`
 
   if [ `echo $LAST_STATE` == "CANCELLED|0:9" ]; then
@@ -51,9 +51,9 @@ if [ ! -f LAST_EXIT ]; then
     rm -rv ../bak.run.*/
   fi
 
-  if ls -tr ../job.*.*.out >/dev/null 2>&1; then
-    LAST_RUNLOG=`ls -tr ../job.*.*.out | tail -n 1`
-    LAST_JOBNO=`echo $LAST_RUNLOG | awk -F. '{ print $2 }'`
+  if ls -tr ../job.*.*.out | grep -v $SLURM_JOB_ID >/dev/null 2>&1; then
+    LAST_RUNLOG=`ls -tr ../job.*.*.out | grep -v $SLURM_JOB_ID | tail -n 1`
+    LAST_JOBNO=`echo $( basename $LAST_RUNLOG ) | awk -F. '{ print $2 }'`
 
     echo "We have previous job logs from $LAST_JOBNO but no LAST_EXIT. I have
     saved into bak.run.$LAST_JOBNO but will prep the run. Please intervene or
