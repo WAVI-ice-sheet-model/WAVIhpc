@@ -27,6 +27,9 @@ ensemble:
         - name:   execute
           args:
             cmd:  /bin/ln -s ../../scripts/BAS/pre_run.sh
+        - name:   quota
+          args:
+            atleast:  1073741824
       runs:
       - thickness: 100.0
         accumulation: 0.1
