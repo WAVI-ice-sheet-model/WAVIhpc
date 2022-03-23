@@ -10,6 +10,8 @@ if [ -f run/outfile.nc ]; then
   rsync -avhP ../$CASENAME $COPYDEST/
 
   if [ $? -eq 0 ]; then
+    cd ..
     echo "Deleting $CASENAME from `pwd`"
+    rm -rv $CASENAME/
   fi
 fi
