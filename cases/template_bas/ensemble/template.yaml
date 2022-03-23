@@ -208,8 +208,11 @@ ensemble:
         accumulation: 0.8
       - thickness: 1000.0
         accumulation: 0.9
-      post_run:     
+      post_run:
         - name: execute
           args:
             cmd:    /bin/bash scripts/ensure_exit.sh
+        - name: execute
+          args:
+            cmd:    /bin/bash scripts/post_run.sh
       post_batch:   []
