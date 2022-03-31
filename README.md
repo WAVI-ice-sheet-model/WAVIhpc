@@ -61,3 +61,13 @@ export PATH="`realpath .`/scripts/archer:$PATH"
 ```
 
 TODO: clarify workflow with Alex / gain access and retest
+
+## Development of WAVI
+
+```bash
+cd <directoryOfRepo>
+export PATH="`realpath .`/scripts/BAS:$PATH"
+git clone -b <branch> <forkUrl>
+wavi_install --develop WAVI.jl
+# Continue with general usage
+```

@@ -8,4 +8,5 @@
 /cases/*/run/*
 /logs/
 /venv/
+/WAVI.jl/
 /wavi_test/
