@@ -38,14 +38,14 @@ sed -r \
   cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/template.yaml \
   >${ENSEMBLE_CONFIG}
 
-model_ensemble -ms 30 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
-
-until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
-  echo "Running another ensemble, individual runs timed out"
+function do_ensemble() {
+  ENAME=$1
+  ECONFIG=$2
+  ETARGET=$3
   IDXSTR=""
 
-  if [ $( find cases/${ENSEMBLE_NAME}-* -maxdepth 1 -name 'execute_command.*.*.log' | wc -l ) -gt 0 ]; then
-    IDXSTR=$( for F in $( find cases/${ENSEMBLE_NAME}-* -maxdepth 2 -name 'driver.jl' 2>/dev/null | egrep '/run/driver.jl$' ); do echo -n ${F/cases\/${ENSEMBLE_NAME}-/} | sed -r 's/^([0-9]+)\/.+$/\1/'; echo -n ","; done )
+  if [ $( find cases/${ENAME}-* -maxdepth 1 -name 'execute_command.*.*.log' | wc -l ) -gt 0 ]; then
+    IDXSTR=$( for F in $( find cases/${ENAME}-* -maxdepth 2 -name 'driver.jl' 2>/dev/null | egrep '/run/driver.jl$' ); do echo -n ${F/cases\/${ENAME}-/} | sed -r 's/^([0-9]+)\/.+$/\1/'; echo -n ","; done )
     IDXSTR=${IDXSTR%,}
 
     [ ! -z "$IDXSTR" ] && IDXSTR="-i $IDXSTR"
@@ -57,7 +57,14 @@ until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
     fi
   fi
 
-  model_ensemble -ms 30 -p $IDXSTR -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
+  model_ensemble -ms 30 -p $IDXSTR -v $ECONFIG $ETARGET
+}
+
+do_ensemble $ENSEMBLE_NAME $ENSEMBLE_CONFIG $ENSEMBLE_TARGET
+
+until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
+  echo "Running another ensemble, individual runs timed out"
+  do_ensemble $ENSEMBLE_NAME $ENSEMBLE_CONFIG $ENSEMBLE_TARGET
 done
 
 exit $?
