@@ -38,6 +38,8 @@ sed -r \
   cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/template.yaml \
   >${ENSEMBLE_CONFIG}
 
+model_ensemble -ms 30 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
+
 until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
   echo "Running another ensemble, individual runs timed out"
   IDXSTR=""
