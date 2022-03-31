@@ -46,7 +46,7 @@ until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
     IDXSTR=$( for F in $( find cases/${ENSEMBLE_NAME}-* -maxdepth 2 -name 'driver.jl' 2>/dev/null | egrep '/run/driver.jl$' ); do echo -n ${F/cases\/${ENSEMBLE_NAME}-/} | sed -r 's/^([0-9]+)\/.+$/\1/'; echo -n ","; done )
     IDXSTR=${IDXSTR%,}
 
-    [ ! -z "$IDXSTR" ] && IDXSTR="-k $IDXSTR"
+    [ ! -z "$IDXSTR" ] && IDXSTR="-i $IDXSTR"
     echo "Providing indexes $IDXSTR"
 
     if [ ${#IDXSTR} -gt 4096 ]; then
