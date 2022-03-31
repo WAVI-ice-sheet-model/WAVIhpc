@@ -41,7 +41,7 @@ sed -r \
 until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
   echo "Running another ensemble, individual runs timed out"
   IDXSTR=""
-  
+
   if [ $( find cases/${ENSEMBLE_NAME}-* -maxdepth 1 -name 'execute_command.*.*.log' | wc -l ) -gt 0 ]; then
     IDXSTR=$( for F in $( find cases/${ENSEMBLE_NAME}-* -maxdepth 2 -name 'driver.jl' 2>/dev/null | egrep '/run/driver.jl$' ); do echo -n ${F/cases\/${ENSEMBLE_NAME}-/} | sed -r 's/^([0-9]+)\/.+$/\1/'; echo -n ","; done )
     IDXSTR=${IDXSTR%,}
@@ -55,7 +55,7 @@ until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
     fi
   fi
 
-  model_ensemble -p $IDXSTR -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
+  model_ensemble -ms 30 -p $IDXSTR -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
 done
 
 exit $?
