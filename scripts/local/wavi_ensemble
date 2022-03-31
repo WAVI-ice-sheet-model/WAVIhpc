@@ -38,33 +38,6 @@ sed -r \
   cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/template.yaml \
   >${ENSEMBLE_CONFIG}
 
-function do_ensemble() {
-  ENAME=$1
-  ECONFIG=$2
-  ETARGET=$3
-  IDXSTR=""
-
-  if [ $( find cases/${ENAME}-* -maxdepth 1 -name 'execute_command.*.*.log' | wc -l ) -gt 0 ]; then
-    IDXSTR=$( for F in $( find cases/${ENAME}-* -maxdepth 2 -name 'driver.jl' 2>/dev/null | egrep '/run/driver.jl$' ); do echo -n ${F/cases\/${ENAME}-/} | sed -r 's/^([0-9]+)\/.+$/\1/'; echo -n ","; done )
-    IDXSTR=${IDXSTR%,}
-
-    [ ! -z "$IDXSTR" ] && IDXSTR="-i $IDXSTR"
-    echo "Providing indexes $IDXSTR"
-
-    if [ ${#IDXSTR} -gt 4096 ]; then
-      echo "Logic failure, indexes too long, contact dev: ${#IDXSTR}"
-      exit 1
-    fi
-  fi
-
-  model_ensemble -ms 30 -p $IDXSTR -v $ECONFIG $ETARGET
-}
-
-do_ensemble $ENSEMBLE_NAME $ENSEMBLE_CONFIG $ENSEMBLE_TARGET
-
-until check_timeout_statuses "${ENSEMBLE_NAME}-*"; do
-  echo "Running another ensemble, individual runs timed out"
-  do_ensemble $ENSEMBLE_NAME $ENSEMBLE_CONFIG $ENSEMBLE_TARGET
-done
+model_ensemble -ms 30 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
 
 exit $?

@@ -69,5 +69,6 @@ cd <directoryOfRepo>
 export PATH="`realpath .`/scripts/BAS:$PATH"
 git clone -b <branch> <forkUrl>
 wavi_install --develop WAVI.jl
-# Continue with general usage
+# Continue with general usage but symlink WAVI.jl in the cases/templates
+# TODO: automate
 ```
