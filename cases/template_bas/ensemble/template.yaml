@@ -225,5 +225,5 @@ ensemble:
       post_batch:
         - name:     check
           args:
-            cmd:    /bin/ls -d NAME-*
+            cmd:    ../../scripts/BAS/post_batch.sh /data/icesheet_output/${USER}/WAVIhpc NAME
             fail:   True
