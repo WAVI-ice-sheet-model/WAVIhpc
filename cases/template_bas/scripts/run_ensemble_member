@@ -69,6 +69,6 @@ else
   sed -i '0,/.*niter0.*/s//'"$NITER0_LINE"'/' driver.jl
 fi
 
-run_driver 2>&1 >proc.${PICKUP:-0}.log &
+run_driver >proc.${PICKUP:-0}.log 2>&1
 
-exit 0
+exit $?
