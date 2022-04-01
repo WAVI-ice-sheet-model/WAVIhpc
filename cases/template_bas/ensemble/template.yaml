@@ -216,12 +216,11 @@ ensemble:
       post_run:
         - name:     check
           args:
-            cmd:    [ ! -f run/outfile.nc ]
+            cmd:    /usr/bin/test ! -f run/outfile.nc
             fail:   True
         - name:     move
           args:
             dest:   "/data/icesheet_output/${USER}/WAVIhpc"
-            log:    True
         - name:     remove
       post_batch:
         - name:     check
