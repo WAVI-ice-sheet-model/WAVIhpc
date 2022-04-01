@@ -216,7 +216,7 @@ ensemble:
       post_run:
         - name:     check
           args:
-            cmd:    /usr/bin/test ! -f run/outfile.nc
+            cmd:    /usr/bin/test -f run/outfile.nc
             fail:   True
         - name:     move
           args:
