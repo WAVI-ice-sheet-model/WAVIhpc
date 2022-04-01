@@ -1,48 +1,24 @@
 #!/usr/bin/env bash
 
-module load hpc/julia/1.6.2
+if [ $# -lt 1 ]; then
+    echo "Usage pre_run <copyDest>"
+    exit 1
+fi
 
-# https://unix.stackexchange.com/questions/146756/forward-sigterm-to-child-in-bash/444676#444676
-prep_term()
-{
-    unset term_child_pid
-    unset term_kill_needed
-    trap 'handle_term' TERM INT
-}
+DESTINATION="$1"
+OUTFILE="run/outfile.nc"
 
-handle_term()
-{
-    if [ "${term_child_pid}" ]; then
-        echo "Killing child process at `date +%F-%T`"
-        kill -TERM "${term_child_pid}" 2>/dev/null
+RUNID=$( basename `realpath .` )
+RUNDEST="$DESTINATION/$RUNID"
 
-        echo -n "124" >LAST_EXIT
-    else
-        term_kill_needed="yes"
-    fi
-}
+if [ -d $RUNDEST ]; then
+    echo "Destination $RUNDEST already exists, bailing to avoid overwrite"
+    exit 1
+fi
 
-wait_term()
-{
-    term_child_pid=$!
-    if [ "${term_kill_needed}" ]; then
-        kill -TERM "${term_child_pid}" 2>/dev/null 
-    fi
-    wait ${term_child_pid} 2>/dev/null
-    
-    CHILD_EXIT=$?
-    # In theory this will only exist already if handle_term has processed
-    if [ ! -f LAST_EXIT ]; then
-        echo "$JULIA_EXIT" >LAST_EXIT
-    fi
+if [ -f $OUTFILE ]; then
+    echo "Destination $OUTFILE already exists, bailing to avoid overwrite"
+    exit 1
+fi
 
-    trap - TERM INT
-
-    wait ${term_child_pid} 2>/dev/null
-
-    CHILD_EXIT=$?
-    # In theory this will only exist already if handle_term has processed
-    if [ ! -f LAST_EXIT ]; then
-        echo "$JULIA_EXIT" >LAST_EXIT
-    fi
-}
+exit 0

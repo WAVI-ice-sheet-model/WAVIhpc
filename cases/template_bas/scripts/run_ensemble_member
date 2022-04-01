@@ -18,64 +18,20 @@
 CWD="`realpath .`"
 NAME="basename $CWD"
 RUNDIR="run"
+OUTFILE="outfile.nc"
 
-if [ -x ./pre_run.sh ]; then
-  echo "Pre-run script found, running"
-  . pre_run.sh
-fi
+module load hpc/julia/1.6.2
 
 cd $RUNDIR
 
 export PATH="`realpath ..`/scripts:$PATH"
 
-# We need to protect against previous incarnations of the job that have been
-# SIGKILL'd from destroying the cached data.
-# If we detect a sign of SIGKILL in the previous job, let's assume to create a
-# LAST_EXIT file and preserve the previous incarnation of the run directory
-if ls -tr ../job.*.*.out | grep -v $SLURM_JOB_ID >/dev/null 2>&1; then
-  LAST_RUNLOG=`ls -tr ../job.*.*.out | grep -v $SLURM_JOB_ID | tail -n 1`
-  LAST_JOBNO=`echo $( basename $LAST_RUNLOG ) | awk -F. '{ print $2 }'`
-  LAST_STATE=`sacct -nP -o state,exitcode -j ${LAST_JOBNO}.batch`
-
-  if [ `echo $LAST_STATE` == "CANCELLED|0:9" ]; then
-    echo "We have a brutal previous status for $LAST_JOBNO so we're assuming
-we need to set this to be picked up. It may fail if this is actually a new run
-or failed for another reason." | mail -s "SIGKILL notification" {{ run.email }}
-    echo -n "124">LAST_EXIT
-  fi
-fi
-
-if [ ! -f LAST_EXIT ]; then
-  if ls -d ../bak.run.*/ >/dev/null 2>&1; then
-    echo "Cleaning out old backup directories..."
-    rm -rv ../bak.run.*/
-  fi
-
-  if ls -tr ../job.*.*.out | grep -v $SLURM_JOB_ID >/dev/null 2>&1; then
-    LAST_RUNLOG=`ls -tr ../job.*.*.out | grep -v $SLURM_JOB_ID | tail -n 1`
-    LAST_JOBNO=`echo $( basename $LAST_RUNLOG ) | awk -F. '{ print $2 }'`
-
-    echo "We have previous job logs from $LAST_JOBNO but no LAST_EXIT. I have
-    saved into bak.run.$LAST_JOBNO but will prep the run. Please intervene or
-    contact devs if necessary" | mail -s "Backup notification" {{ run.email }}
-    rsync -avh ../run/ ../bak.run.${LAST_JOBNO}/
-  fi
-
+if [ ! -f driver.jl ]; then
   prep_run
 else
-  LAST_EXIT_CODE=`cat LAST_EXIT`
-
-  if [ $LAST_EXIT_CODE -ne 124 ]; then
-    echo "Not a pickup next run exit code from last run"
-    exit 0
-  fi
-
   if ! ls PChkpt_*.jld2 1> /dev/null 2>&1 ; then
     echo 'job chain: fail, no pickup files'
-    echo "1" >LAST_EXIT
     exit 1
-  else
-    rm -v LAST_EXIT
   fi
 
   for file in PChkpt_*.jld2; do
@@ -91,7 +47,17 @@ else
     echo 'job chain: pickup from permanent checkpoint'
 
     # Save the timestep, with any leading zeros removed
+    CURITER=$( egrep '^niter0' driver.jl | sed -r 's/^niter0 = ([0-9]+)/\1/' )
     NITER0=$(echo $PICKUP | sed 's/^0*//')
+
+    if [ "$CURITER" -eq "$NITER0" ] && [ ! -f $OUTFILE ]; then
+      echo "No progress was made in the last run, we'll assume failure or another
+      termination scenario. Please investigate or contact devs if necessary.
+      We'll be placing an $OUTFILE to prevent further submissions." | mail -s "Failure notification for $NAME " {{ run.email }}
+      # Touch an output file as a marker
+      touch $OUTFILE
+      exit 1
+    fi
   else
     echo 'job chain: fail, problem w pickup (WAVI only currently supports pCkpt pickups)' $PICKUP
     exit 1
@@ -103,13 +69,6 @@ else
   sed -i '0,/.*niter0.*/s//'"$NITER0_LINE"'/' driver.jl
 fi
 
-prep_term
 run_driver 2>&1 >proc.${PICKUP:-0}.log &
-
-wait_term
-
-if [ -x ./post_run.sh ]; then
-  . post_run.sh
-fi
 
 exit 0

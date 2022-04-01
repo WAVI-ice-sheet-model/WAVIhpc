@@ -22,11 +22,13 @@ ensemble:
   batches:
     - name:       NAME
       basedir:    ./cases
+      repeat:     True
       pre_batch:  []
       pre_run:
         - name:   execute
           args:
-            cmd:  /bin/ln -s ../../scripts/BAS/pre_run.sh
+            cmd:  ../../scripts/BAS/pre_run.sh
+            fail: True
         - name:   quota
           args:
             atleast:  1073741824
@@ -212,11 +214,17 @@ ensemble:
       - thickness: 1000.0
         accumulation: 0.9
       post_run:
-        - name: execute
+        - name:     check
           args:
-            cmd:    /bin/bash scripts/ensure_exit.sh
-        - name: execute
+            cmd:    [ ! -f run/outfile.nc ]
+            fail:   True
+        - name:     move
           args:
-            cmd:    /bin/bash scripts/post_run.sh
-            log:    true
-      post_batch:   []
+            dest:   "/data/icesheet_output/${USER}/WAVIhpc"
+            log:    True
+        - name:     remove
+      post_batch:
+        - name:     check
+          args:
+            cmd:    /bin/ls -d NAME-*
+            fail:   True
