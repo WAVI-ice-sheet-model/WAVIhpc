@@ -9,7 +9,7 @@ DESTINATION="$1"
 RUNNAME="$2"
 OUTFILE="run/outfile.nc"
 
-for DIR in ls -d ${RUNNAME}-*; do
+for DIR in $( ls -d ${RUNNAME}-* ); do
     echo "Checking for output in $DESTINATION"
 
     if [ ! -f $DESTINATION/$DIR/$OUTFILE ]; then

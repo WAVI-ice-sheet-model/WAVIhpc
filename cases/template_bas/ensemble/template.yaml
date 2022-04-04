@@ -27,7 +27,7 @@ ensemble:
       pre_run:
         - name:   check
           args:
-            cmd:  ../../scripts/BAS/pre_run.sh /data/icesheet_output/${USER}/WAVIhpc
+            cmd:  ../scripts/BAS/pre_run.sh /data/icesheet_output/${USER}/WAVIhpc
             fail: True
         - name:   quota
           args:
