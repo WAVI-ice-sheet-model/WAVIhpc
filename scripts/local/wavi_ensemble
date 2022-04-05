@@ -38,6 +38,6 @@ sed -r \
   cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/template.yaml \
   >${ENSEMBLE_CONFIG}
 
-model_ensemble -ms 30 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
+model_ensemble -ms 30 -ct 30 -st 20 -rt 120 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
 
 exit $?
