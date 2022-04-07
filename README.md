@@ -62,12 +62,18 @@ your /work directory
 
 ```bash
 # WAVIhpc MUST be installed under your /work directory for slurm runs
-export PATH="`realpath .`/scripts/archer:$PATH"
+# Do this once for a working copy of julia and then you're done
+cd <directoryOfRepo>
+export PATH="`pwd`/scripts/archer:$PATH"
 install_julia.sh
-cd WAVIhpc
+
+# Log out and back in again - this is the block to use normally
+cd <directoryOfRepo>
+export PATH="`pwd`/scripts/archer:$PATH"
 wavi_install
 wavi_create_case anewcase template_archer
-module load cray_python
+# The next module load is only required the first time you run wavi_ensemble
+module load cray-python
 wavi_ensemble test_ensemble anewcase
 ```
 
