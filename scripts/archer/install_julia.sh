@@ -19,6 +19,10 @@ if ! egrep -q "$BINCOMMENT" $HOME/.bashrc; then
     PATHMOD="export PATH=$BINDIR:\$PATH"
     echo "$PATHMOD" >> $HOME/.bashrc
     eval $PATHMOD
+
+    DEPOTMOD="export JULIA_DEPOT_PATH=$WORKDIR/.julia:\$JULIA_DEPOT_PATH"
+    echo "$DEPOTMOD" >> $HOME/.bashrc
+    eval $DEPOTMOD
 fi
 
 mkdir -p bin julia

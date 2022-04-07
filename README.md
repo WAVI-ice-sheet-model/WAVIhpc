@@ -56,8 +56,19 @@ wavi_ensemble test_ensemble anewcase
 
 ## Archer2
 
+Use install_julia.sh below to install julia, or if you already have an
+installation sorted, ensure `JULIA_DEPOT_PATH` is set as with BAS, but under
+your /work directory
+
 ```bash
+# WAVIhpc MUST be installed under your /work directory for slurm runs
 export PATH="`realpath .`/scripts/archer:$PATH"
+install_julia.sh
+cd WAVIhpc
+wavi_install
+wavi_create_case anewcase template_archer
+module load cray_python
+wavi_ensemble test_ensemble anewcase
 ```
 
 TODO: clarify workflow with Alex / gain access and retest
