@@ -63,5 +63,5 @@ ensemble:
       post_batch:
         - name:     check
           args:
-            cmd:    ../scripts/BAS/post_batch.sh ${HOME}/WAVIhpc.runs NAME
+            cmd:    ../scripts/archer/post_batch.sh ${HOME}/WAVIhpc.runs NAME
             fail:   True
