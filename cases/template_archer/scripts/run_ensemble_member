@@ -10,11 +10,14 @@
 #SBATCH --qos=standard
 #SBATCH --account={{ run.cluster }}
 #SBATCH --cpus-per-task={{ run.ntasks }}
-#SBATCH --mem=8gb
+#SBATCH --time={{ run.length }}
 #SBATCH --signal=B:SIGINT@60
 
 # TODO: this logic is better in the ensemble run items, only to align to
 # previous approach have I ended up implementing it here, but it's growing :(
+
+# TODO: refactor please, these implementations diverge for HPC reasons, but 
+# the common functionality should be made just that
 
 CWD="`realpath .`"
 NAME="basename $CWD"
@@ -23,7 +26,8 @@ OUTFILE="outfile.nc"
 
 cd $RUNDIR
 
-export PATH="`realpath ..`/scripts:$PATH"
+export PATH="`realpath ..`/scripts:${HOME/\/home/\/work}/bin:$PATH"
+export JULIA_DEPOT_PATH=${HOME/\/home/\/work}/.julia:$JULIA_DEPOT_PATH
 
 if [ ! -f driver.jl ]; then
   prep_run

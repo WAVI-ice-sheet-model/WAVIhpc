@@ -18,30 +18,31 @@ if ! egrep -q "$BINCOMMENT" $HOME/.bashrc; then
     echo $BINCOMMENT >> $HOME/.bashrc
     PATHMOD="export PATH=$BINDIR:\$PATH"
     echo "$PATHMOD" >> $HOME/.bashrc
-    eval $PATHMOD
 
     DEPOTMOD="export JULIA_DEPOT_PATH=$WORKDIR/.julia:\$JULIA_DEPOT_PATH"
     echo "$DEPOTMOD" >> $HOME/.bashrc
-    eval $DEPOTMOD
 fi
 
 mkdir -p bin julia
 
 cd julia
 
-[ ! -f $JULIAFILENAME ] && wget $JULIAURL -O $JULIAFILENAME
+echo "Downloading julia if required, and unpacking"
+[ ! -f $JULIAFILENAME ] && wget -nv $JULIAURL -O $JULIAFILENAME
 
-JULIADEST=`tar tvf $JULIAFILENAME | head -n 1 | awk '{ print $6 }'`
-tar xvzf $JULIAFILENAME
+JULIADEST=`tar tvf $JULIAFILENAME | awk '{ print $6 }' | sed -n 1p`
+tar xvzf $JULIAFILENAME >/dev/null
 
+echo "Linking up the command"
 ln -sf $JULIADEST current
 JULIACOMMAND="$WORKDIR/julia/current/bin/julia"
 
 cd ..
 
-if [ ! -l $BINDIR/julia ]; then
+if [ ! -L "$BINDIR/julia" ]; then
     ln -s $JULIACOMMAND $BINDIR/julia
-    echo "Julia now installed, you should be able to run it anywhere"
+    echo "Julia now installed, you should be able to run it anywhere once you log out 
+    and back in again, or source \$HOME/.bashrc"
 else
     echo "Cowardly refusing to replace existing $BINDIR/julia, do it yourself!"
     echo "New julia available via: $JULIACOMMAND"

@@ -12,10 +12,10 @@ ensemble:
       - scripts/run_ensemble_member.j2
     email:        jambyr@bas.ac.uk
     job_file:     scripts/run_ensemble_member
-    cluster:      n02
+    cluster:      n02-bas
     nodes:        1
     ntasks:       1
-    length:       00:05:00
+    length:       00:10:00
     maxruns:      10
     maxjobs:      3
 
