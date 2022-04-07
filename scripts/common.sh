@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o pipefail
+set -eo pipefail
 
 if ! which julia; then
   echo "Julia is not available in PATH"

@@ -1,0 +1,67 @@
+---
+ensemble:
+  vars:                 {}
+
+  pre_process:          []
+  post_process:         []
+
+  batch_config:
+    templatedir:  TEMPLATE
+    templates:
+      - input/driver.jl.j2
+      - scripts/run_ensemble_member.j2
+    email:        jambyr@bas.ac.uk
+    job_file:     scripts/run_ensemble_member
+    cluster:      n02
+    nodes:        1
+    ntasks:       1
+    length:       00:05:00
+    maxruns:      10
+    maxjobs:      3
+
+  batches:
+    - name:       NAME
+      basedir:    ./cases
+      repeat:     True
+      pre_batch:
+      - name:     execute
+        args:
+          cmd:    /usr/bin/mkdir -p ${HOME}/WAVIhpc.runs
+      pre_run:
+        - name:   check
+          args:
+            cmd:  ../../scripts/archer/pre_run.sh ${HOME}/WAVIhpc.runs
+            fail: True
+      runs:
+      - thickness: 100.0
+        accumulation: 0.1
+      - thickness: 800.0
+        accumulation: 0.1
+      - thickness: 1000.0
+        accumulation: 0.1
+      - thickness: 100.0
+        accumulation: 0.2
+      - thickness: 100.0
+        accumulation: 0.3
+      - thickness: 800.0
+        accumulation: 0.4
+      - thickness: 800.0
+        accumulation: 0.5
+      - thickness: 1000.0
+        accumulation: 0.2
+      - thickness: 1000.0
+        accumulation: 0.5
+      post_run:
+        - name:     check
+          args:
+            cmd:    /usr/bin/test -f run/outfile.nc
+            fail:   True
+        - name:     move
+          args:
+            dest:   "${HOME}/WAVIhpc"
+        - name:     remove
+      post_batch:
+        - name:     check
+          args:
+            cmd:    ../scripts/BAS/post_batch.sh ${HOME}/WAVIhpc.runs NAME
+            fail:   True
