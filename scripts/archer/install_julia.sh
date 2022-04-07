@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail 
+set -eo pipefail
 
 JULIAURL=${1:-"https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.2-linux-x86_64.tar.gz"}
 JULIAFILENAME=`echo $JULIAURL | sed -r 's/^.+\/([^\/]+)$/\1/'`
@@ -16,16 +16,16 @@ cd $WORKDIR
 if ! egrep -q "$BINCOMMENT" $HOME/.bashrc; then
     echo "$BINCOMMENT in bashrc"
     echo $BINCOMMENT >> $HOME/.bashrc
-    PATHMOD="export PATH=$BINDIR:\$PATH" 
+    PATHMOD="export PATH=$BINDIR:\$PATH"
     echo "$PATHMOD" >> $HOME/.bashrc
-    eval $PATHMOD    
+    eval $PATHMOD
 fi
 
 mkdir -p bin julia
 
 cd julia
 
-wget $JULIAURL -O $JULIAFILENAME
+[ ! -f $JULIAFILENAME ] && wget $JULIAURL -O $JULIAFILENAME
 
 JULIADEST=`tar tvf $JULIAFILENAME | head -n 1 | awk '{ print $6 }'`
 tar xvzf $JULIAFILENAME
@@ -44,4 +44,3 @@ else
 fi
 
 exit 0
-
