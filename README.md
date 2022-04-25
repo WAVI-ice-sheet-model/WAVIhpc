@@ -100,7 +100,7 @@ So in whichever WAVIhpc folder you want (make sure you're in the root of it thou
 git checkout revised_workflow
 git pull
 source venv/bin/activate
-pip install --upgrade git+https://git@github.com/JimCircadian/model-ensembler.git@v0.5.4_work
+pip install --upgrade model_ensembler
 deactivate
 ```
 
