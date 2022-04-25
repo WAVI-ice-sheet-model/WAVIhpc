@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+. scripts/common.sh
+
+# TODO: Containerise option and harmonise with Alexs Archer functionality
+
+julia scripts/julia_install_wavi.jl "$@"

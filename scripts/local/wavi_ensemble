@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage $0 <ensembleName> [ensembleTemplateCase]"
+  exit 1
+fi
+
+. scripts/common.sh
+
+if [ ! -d venv ]; then
+  if [ $( python3 --version 2>&1 | sed -r 's/^.+ 3\.([0-9]+)\..+$/\1/' ) -lt 7 ]; then
+    echo "You need to be running python3 at least of version 3.7"
+    exit 1
+  fi
+
+  echo "Setting up a python environment for model ensembler"
+  python3 -m venv venv
+  source venv/bin/activate
+
+  pip install --upgrade pip setuptools
+  pip install model_ensembler
+else
+  source venv/bin/activate
+fi
+
+CFG_DIR="`dirname $0`"
+ENSEMBLE_TARGET="slurm"
+ENSEMBLE_NAME="${1}"
+ENSEMBLE_TEMPLATE_CASE="${2:-template}"
+ENSEMBLE_CONFIG="cases/${ENSEMBLE_TEMPLATE_CASE}/ensemble/${ENSEMBLE_NAME}.yaml"
+if [ "$ENSEMBLE_TYPE" == "local" ]; then
+  ENSEMBLE_TARGET="dummy"
+fi
+
+sed -r \
+  -e "s/NAME/${ENSEMBLE_NAME}/g" \
+  -e "s/TEMPLATE/${ENSEMBLE_TEMPLATE_CASE}/g" \
+  cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/template.yaml \
+  >${ENSEMBLE_CONFIG}
+
+model_ensemble -ms 30 -ct 30 -st 20 -rt 120 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
+
+exit $?

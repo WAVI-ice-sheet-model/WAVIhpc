@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage $0 <name> [env]"
+  exit 1
+fi
+
+. scripts/common.sh
+
+NAME="$1"
+WAVI_ENV="${2:-}"
+
+RUNDIR="cases/$NAME/run"
+
+if [ ! -d $RUNDIR ]; then
+  echo "Missing run directory, is the case created?: $RUNDIR"
+  exit 1
+fi
+
+if [ ! -z "$WAVI_ENV" ]; then
+  export WAVI_ENV
+fi
+
+cd $RUNDIR
+export PATH="`realpath ..`/scripts:$PATH"
+
+prep_run
+
+run_driver
+RETCODE=$?
+echo "Julia process returned: $RETCODE"
+
+exit $RETCODE

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+#SBATCH --output={{ run.dir }}/job.%j.%N.out
+#SBATCH --error={{ run.dir }}/job.%j.%N.err
+#SBATCH --chdir={{ run.dir }}
+#SBATCH --mail-type=begin,end,fail,requeue
+#SBATCH --mail-user={{ run.email }}
+#SBATCH --time={{ run.length }}
+#SBATCH --job-name={{ run.id }}
+#SBATCH --nodes={{ run.nodes }}
+#SBATCH --partition={{ run.cluster }}
+#SBATCH --account={{ run.cluster }}
+#SBATCH --cpus-per-task={{ run.ntasks }}
+#SBATCH --mem=64gb
+
+CWD="`realpath .`"
+NAME="basename $CWD"
+RUNDIR="run"
+
+if [ -x ./pre_run.sh ]; then
+  echo "Pre-run script found, running"
+  . pre_run.sh
+fi
+
+cd $RUNDIR
+
+export PATH="`realpath ..`/scripts:$PATH"
+
+if [ ! -f LAST_EXIT ]; then
+  prep_run
+else
+  LAST_EXIT_CODE=`cat LAST_EXIT`
+
+  if [ $LAST_EXIT_CODE -ne 124 ]; then
+    echo "Not a pickup next run exit code from last run"
+    exit 0
+  fi
+
+  if ! ls PChkpt_*.jld2 1> /dev/null 2>&1 ; then
+    echo 'job chain: fail, no pickup files'
+    exit 1
+  fi
+  for file in PChkpt_*.jld2; do
+    [[ $file -nt $PICKUP_FILE ]] && PICKUP_FILE=$file
+  done
+  # Extract the middle bit of this filename
+  PICKUP=${PICKUP_FILE#PChkpt_}
+  PICKUP=${PICKUP%.jld2}
+
+  re='^[0-9]+$'
+  if [[ $PICKUP =~ $re ]]; then
+    echo 'job chain: pickup from permanent checkpoint'
+
+    # Save the timestep, with any leading zeros removed
+    NITER0=$(echo $PICKUP | sed 's/^0*//')
+  else
+    echo 'job chain: fail, problem w pickup (WAVI only currently supports pCkpt pickups)' $PICKUP
+    exit 1
+  fi
+
+  #edit the driver namelist: replace the first instance of niter0 = * with appropriate checkpoint number
+  NITER0_LINE="niter0 = $NITER0"
+  echo $NITER0_LINE
+  sed -i '0,/.*niter0.*/s//'"$NITER0_LINE"'/' driver.jl
+fi
+
+run_driver >proc.${PICKUP:-0}.log 2>&1
+RETCODE=$?
+echo "Julia process returned: $RETCODE"
+echo -n "$RETCODE" >LAST_EXIT
+
+if [ -x ./post_run.sh ]; then
+  . post_run.sh
+fi
+
+exit 0

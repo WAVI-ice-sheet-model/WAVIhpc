@@ -2,4 +2,11 @@
 *.mat
 *.jld2
 *.julia
-./cases/*/run/*
+.vscode/
+/*.yaml
+!/cases/*/run/README.md
+/cases/*/run/*
+/logs/
+/venv/
+/WAVI.jl/
+/wavi_test/
