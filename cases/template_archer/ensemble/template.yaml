@@ -58,7 +58,7 @@ ensemble:
             fail:   True
         - name:     move
           args:
-            dest:   "${HOME}/WAVIhpc"
+            dest:   "${HOME}/WAVIhpc.runs"
         - name:     remove
       post_batch:
         - name:     check
