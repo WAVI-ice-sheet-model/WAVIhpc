@@ -11,11 +11,18 @@ Extended to support execution in single mode and ensemble mode on the following 
 # Usage
 
 At present, prior to the wavi_install command, I run the following:
-
+for bash:
 ```bash
 export WAVI_REPO="git@github.com:RJArthern/WAVI.jl.git"
 export WAVI_REV="AlexDev"
 ```
+
+or for c shell
+```csh
+setenv WAVI_REPO "https://github.com/RJArthern/WAVI.jl"
+setenv WAVI_REV "<branch_name>>"
+```
+
 
 ## local
 
