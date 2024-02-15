@@ -10,7 +10,7 @@ Extended to support execution in single mode and ensemble mode on the following 
 
 # Usage
 
-At present, prior to the wavi_install command, I run the following:
+At present, prior to the wavi_install command, I run the following:  
 for bash:
 ```bash
 export WAVI_REPO="git@github.com:RJArthern/WAVI.jl.git"
