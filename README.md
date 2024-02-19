@@ -61,6 +61,11 @@ module load hpc/python/conda-python-3.7.3
 wavi_ensemble test_ensemble anewcase
 ```
 
+(for c shell, replace the second line with
+```csh
+setenv PATH $PATH":`realpath .`/scripts/BAS"
+```
+
 ## Archer2
 
 Use install_julia.sh below to install julia, or if you already have an
