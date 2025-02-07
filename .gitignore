@@ -6,6 +6,7 @@
 /*.yaml
 !/cases/*/run/README.md
 /cases/*/run/*
+/envs/*/
 /logs/
 /venv/
 /WAVI.jl/

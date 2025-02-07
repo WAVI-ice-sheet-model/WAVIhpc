@@ -18,4 +18,4 @@ cp -f ../input/driver.jl .
 rm -fv pickup*
 cp -fv ../input/pickup* . 2>/dev/null
 
-ln -s ../../../${WAVI_ENV:-wavi_test}
+ln -s ../../../envs/${WAVI_ENV:-wavi_test}

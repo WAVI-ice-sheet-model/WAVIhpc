@@ -12,7 +12,7 @@ using Pkg
 using Printf
 
 env_name = "WAVI_ENV" in keys(ENV) ? ENV["WAVI_ENV"] : "wavi_test"
-Pkg.activate(env_name)
+Pkg.activate(joinpath("envs", env_name))
 
 cwd = pwd()
 @printf("\nCurrent working directory: %s\n", cwd)
