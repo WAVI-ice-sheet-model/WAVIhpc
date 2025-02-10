@@ -39,10 +39,7 @@ solver_params = SolverParams(maxiter_picard = maxiter_picard)
 #
 #Physical parameters
 #
-default_thickness = {{ run.thickness }}
-accumulation_rate = {{ run.accumulation }}
-params = Params(default_thickness = default_thickness,
-                accumulation_rate = accumulation_rate)
+params = Params()
 
 #
 #make the model

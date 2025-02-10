@@ -1,6 +1,6 @@
 # WAVIhpc
 
-Scripts for running WAVI, in either uncoupled or MITgcm-coupled mode.
+A repository to assist with running WAVI ensembles locally or on HPCs.
 
 Extended to support execution in single mode and ensemble mode on the following platforms:
 
@@ -10,19 +10,26 @@ Extended to support execution in single mode and ensemble mode on the following 
 
 # Usage
 
-At present, prior to the wavi_install command, I run the following:  
-for bash:
+## Setting up your environment
+
+__Most importantly, by default activity will take place in a default "wavi_test" Pkg environment. Set `WAVI_ENV` to create / use different environments for different experiements / runs!__ [Please read here for more information about Julia environments](https://pkgdocs.julialang.org/v1/environments/#Creating-your-own-environments).
+
+### Using a remote clone
+
+At present, prior to the wavi_install command, I run the following to set up my repo (_the below are the default values_):  
+
 ```bash
-export WAVI_REPO="git@github.com:RJArthern/WAVI.jl.git"
-export WAVI_REV="AlexDev"
+export WAVI_REPO="https://github.com/RJArthern/WAVI.jl" # bash
+setenv WAVI_REPO "https://github.com/RJArthern/WAVI.jl" # csh
 ```
 
-or for c shell
-```csh
-setenv WAVI_REPO "https://github.com/RJArthern/WAVI.jl"
-setenv WAVI_REV "<branch_name>>"
-```
+You can also set `WAVI_REV` to any revision you'd like to pull, it will default to `main`.
 
+### Using a local development directory
+
+For this, any invocation of `wavi_install` can accept an additional `--develop <path>` argument to specify your local clone of WAVI to install from. Please adapt any following instructions accordingly.
+
+_Any use of the ensembler will require a symlink in the template directory to ensure that the run directory can access your local code._
 
 ## local
 
@@ -32,6 +39,7 @@ wavi_install
 
 # Either
 wavi_create_case anewcase
+## Edit your driver file under cases/anewcase/driver.jl to specify {{ }} tags
 wavi_execute anewcase
 
 # Or run five WAVIs in an ensemble
@@ -39,90 +47,3 @@ wavi_create_case anewcase
 wavi_ensemble test_ensemble anewcase
 ```
 
-**Still need to sort out ensemble configurations on a case by case basis, I defaulted to putting them in the scripts dir by accident...**
-
-## BAS
-
-Make sure you set JULIA_DEPOT_PATH for package storage, in your shells *rc file:
-
-```
-export JULIA_DEPOT_PATH="/data/hpcdata/users/<me>/.julia:$JULIA_DEPOT_PATH"
-```
-
-Then
-
-```bash
-cd <directoryOfRepo>
-export PATH="`realpath .`/scripts/BAS:$PATH"
-module load hpc/julia/1.6.2
-wavi_install
-wavi_create_case anewcase template_bas
-module load hpc/python/conda-python-3.7.3
-wavi_ensemble test_ensemble anewcase
-```
-
-(for c shell, replace the second line with
-```csh
-setenv PATH $PATH":`realpath .`/scripts/BAS"
-```
-
-## Archer2
-
-Use install_julia.sh below to install julia, or if you already have an
-installation sorted, ensure `JULIA_DEPOT_PATH` is set as with BAS, but under
-your /work directory
-
-```bash
-# WAVIhpc MUST be installed under your /work directory for slurm runs
-# Do this once for a working copy of julia and then you're done
-cd <directoryOfRepo>
-export PATH="`pwd`/scripts/archer:$PATH"
-install_julia.sh
-
-# Log out and back in again - this is the block to use normally
-cd <directoryOfRepo>
-export PATH="`pwd`/scripts/archer:$PATH"
-wavi_install
-wavi_create_case anewcase template_archer
-# The next module load is only required the first time you run wavi_ensemble
-module load cray-python
-wavi_ensemble test_ensemble anewcase
-```
-
-TODO: clarify workflow with Alex / gain access and retest
-
-## Development of WAVI
-
-```bash
-cd <directoryOfRepo>
-export PATH="`realpath .`/scripts/BAS:$PATH"
-git clone -b <branch> <forkUrl>
-wavi_install --develop WAVI.jl
-# Continue with general usage but symlink WAVI.jl in the cases/templates
-# TODO: automate
-```
-
-# Revised workflow notes
-
-_From a discussion with Rosie_
-
-So in whichever WAVIhpc folder you want (make sure you're in the root of it though :slightly_smiling_face: ), you'll need to do the following.
-
-```
-git checkout revised_workflow
-git pull
-source venv/bin/activate
-pip install --upgrade model_ensembler
-deactivate
-```
-
-At this point you'll have the latest ensembler code and the new template under template_bas, so if you create your new ensemble template from that you'll see that both ensemble/template.yaml and scripts/* have been altered significantly, with the former being the one you'll need to define your runs in. Other than that you should be able to just bring over driver files etc without trouble, just bearing in mind that the aforementioned directories (especially scripts) are rather different.
-The behavioural changes to be aware of, which I'm testing through at the moment but are better in the long run are:
-
-* No more weird LAST_EXIT or timeout statuses
-* The ensembler will refuse to run a member if there's an outfile or something in icesheet_output, but it'll work for all other members and carry on thereafter
-* It will move the output once outfile is generated and remove the run directory entirely
-The repeat parameter is a flag, so it'll keep running until there are no run directories left for the batch in question
-* The slurm job will place a dummy outfile in the run directory if the previous run started at the same niter as the next run, as this may indicate a failure. It'll email you if this happens
-
-All of these activities are now controlled by the ensembler, which is kind of better to be honest, so you can have a nosey in the template.yaml. Also, I've fixed a gremlin that meant cancelled members hung the batch (apologies, I think you might have tried to say this to me before but I didn't get what you meant, it's a recently introduced error), which is great as it means if jobs get cancelled in slurm (i.e. node reboot) then you shouldn't have to intervene as they'll get picked up next time round.
