@@ -1,6 +1,6 @@
 # WAVIhpc
 
-A configuration repository to assist with running [WAVI](https://github.com/RJArthern/WAVI.jl) ensembles locally or on HPCs using [model-ensembler](https://github.com/environmental-forecasting/model-ensembler).
+A configuration and helper repository to assist with running [WAVI](https://github.com/RJArthern/WAVI.jl) ensembles locally or on HPCs using [model-ensembler](https://github.com/environmental-forecasting/model-ensembler).
 
 WAVIhpc provides convenience function to help set up and run WAVI ensembles:
 
@@ -21,5 +21,5 @@ WAVIhpc also provides generic templates and specific cases you can base your ens
 * `template_archer`: a template set up to run ensembles on Archer.
 * `template_bas`: a template set up to run ensembles on the BAS HPC.
 * `ATTR_666`:
-* `MISMIP_666`: Marine Ice Sheet Model Intercomparison Project (MISMIP)
+* `MISMIP_666`: [Marine Ice Sheet Model Intercomparison Project (MISMIP)](https://tc.copernicus.org/articles/14/2283/2020/)
 * `MISOMIP_666`: Marine Ice Sheet-Ocean Model Intercomparison Project (MISOMIP)
