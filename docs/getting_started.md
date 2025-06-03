@@ -66,6 +66,13 @@ wavi_install
 
 This will install [WAVI](https://github.com/RJArthern/WAVI.jl).
 
+!!! note "Pkg environments"
+
+    WAVI will automatically be installed into an Pkg enviroment called `wavi_test`. As a user, you
+    do not need to do anything for this to happen.
+    
+    However, should you wish to install WAVI into different environments, please refer to the [advanced functionality page](advanced_functionality.md#different-pkg-environments-for-different-experimentsruns) for guidance on how to do this.
+
 ### Create an ensemble configuration
 You can use `wavi_create_case` to create a new template folder to create your ensemble:
 
