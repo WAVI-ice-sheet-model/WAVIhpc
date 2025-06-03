@@ -80,15 +80,18 @@ wavi_ensemble test_ensemble anewcase
 
 ## Archer
 
-## local
+## Running locally
+Compared to running on an HPC system, running locally is more straightforward, just make sure you have
+[Julia installed](https://julialang.org/install/):
 
 ```bash
+cd <directoryOfRepo>
 export PATH="`realpath .`/scripts/local:$PATH"
 wavi_install
 
-# Either
+# Run a single instance of WAVI
 wavi_create_case anewcase
-## Edit your driver file under cases/anewcase/driver.jl to specify {{ }} tags
+## You can edit the driver file to remove {{}} tags, we are not running on SLURM locally
 wavi_execute anewcase
 
 # Or run five WAVIs in an ensemble
