@@ -35,10 +35,23 @@ All other cases also follow this structure. The directories contain the followin
 
 ## template_bas
 
+The BAS template structure is identical to the boilerplate template, but there are changes to `ensemble/template.yaml` and `scripts/run_ensemble_member` tailored to running on the BAS HPC.
+
 ## template_archer
+
+The Archer template structure is identical to the boilerplate template, but there are changes to `ensemble/template.yaml` and `scripts/run_ensemble_member` tailored to running on the Archer HPC.
 
 ## ATTR_666
 
 ## MISMIP_666
+This case is intended to simulate the [Marine Ice Sheet Model Intercomparison](https://tc.copernicus.org/articles/14/2283/2020/), which you can also follow in the [WAVI documentation](https://rjarthern.github.io/WAVI.jl/examples/mismip_plus).
+
+Configured to run on Archer, MISMIP_666 contains changes to `input/driver.jl`, as well as additional files under `/scripts`: `prep_run.sh`, `rsync_jld2.sh`, `rsync_mat.sh`, `rsync.sh`, `run_repeat.sh` and `sub_run.sh`.
 
 ## MISOMIP_666
+
+This case is intended to simulate the Marine Ice Sheet-Ocean Model Intercomparison Project (MISOMIP)
+
+Configured to run on Archer, MISOMIP_666 contains changes to `input/driver.jl`, as well as additional input data files: `bathyREAL_408.box`, `hinit400_40_24_2.box`, `hmask400_40_24_2_edit.bin`, and `Streamice_Thickness_out.data`.
+
+It also contains additional files under `/scripts`: `prep_run.sh`, `rsync.sh`, `run_repeat.sh` and `sub_run.sh`.
