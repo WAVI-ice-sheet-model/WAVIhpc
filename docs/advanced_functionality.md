@@ -25,9 +25,9 @@ First, check the differences between the original template (template_bas) and an
 diff --brief --recursive cases/template_bas/ cases/anewcase/
 ```
 
-This will show you files you have updated, you can partially rsync the files to only transfer updates.
+This will show you files you have updated, you can partially rsync these files to only transfer updates.
 
-For example, if we had changed `code/myfunction.jl` in `template_bas/`, and wanted to move this 
+For example, if we had changed `template_bas/code/myfunction.jl`, and wanted to move this 
 change to `anewcase/code/myfunction.jl`:
 
 ```bash
