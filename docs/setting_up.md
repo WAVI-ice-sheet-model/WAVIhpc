@@ -25,7 +25,7 @@ module load julia-*
 ```
 
 2. Install [Julia manually](https://julialang.org/downloads/platform/#linux_and_freebsd), and set Julia's location in PATH:
-```shell
+```bash
 wget https://julialang-s3.julialang.org/bin/linux/x64/1.11/julia-1.11.5-linux-x86_64.tar.gz
 tar zxvf julia-1.11.5-linux-x86_64.tar.gz
 
@@ -34,7 +34,13 @@ export PATH="$PATH:/path/to/<Julia directory>/bin"
 
 While 1). is more convenient, the availability of modules on the BAS HPC is subject to change.
 
-### Run Directory
+Check Julia is installed:
+```bash
+julia --version
+```
+
+### Run Directory and Scripts
+With Julia installed, make sure the functions in `scripts` can be found:
 
 ```bash
 cd <directoryOfRepo>
@@ -42,16 +48,21 @@ export PATH="`realpath .`/scripts/BAS:$PATH"
 wavi_install
 ```
 
-```
+This will install [WAVI](https://github.com/RJArthern/WAVI.jl).
+
+### Create an ensemble
+You can use `wavi_create_case` to create a new template folder to create your ensemble:
+
+```bash
 wavi_create_case anewcase template_bas
-module load hpc/python/conda-python-3.7.3
+module load python/3.*
+```
+
+### Running the ensemble
+```bash
 wavi_ensemble test_ensemble anewcase
 ```
 
-For c shell, replace the second line with
-```csh
-setenv PATH $PATH":`realpath .`/scripts/BAS"
-```
 ## Archer
 
 ## local
