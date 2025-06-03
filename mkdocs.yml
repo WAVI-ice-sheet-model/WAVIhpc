@@ -1,6 +1,9 @@
 site_name: WAVIhpc
 nav:
   - Overview: index.md
+  - Setting Up: setting_up.md
+  - Usage: usage.md
+  - Troubleshooting: troubleshooting.md
 repo_url: https://github.com/alextbradley/WAVIhpc
 repo_name: WAVIhpc
 edit_uri: edit/main/docs/
@@ -28,6 +31,7 @@ theme:
     - content.code.copy
     # Enables "edit this page" to contribute to docs
     - content.action.edit
+    - content.tabs.link
 markdown_extensions:
   - admonition
   # Enables code block highlighting
