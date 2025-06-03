@@ -3,7 +3,12 @@ nav:
   - Overview: index.md
   - Setting Up: setting_up.md
   - Usage: usage.md
+  - Advanced Usage: advanced_usage.md
+  - Cases: cases.md
   - Troubleshooting: troubleshooting.md
+  - Developer:
+    - Scripts: developer/scripts.md
+  - LICENSE: license.md
 repo_url: https://github.com/alextbradley/WAVIhpc
 repo_name: WAVIhpc
 edit_uri: edit/main/docs/
