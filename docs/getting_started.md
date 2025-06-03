@@ -1,6 +1,10 @@
-# Setting up your environment
+# Getting Started
 
-Depending on which platform you are intending to run your ensemble, there are slightly different instructions.
+Depending on which platform you are intending to run your ensemble, there are slightly different instructions:
+
+1. [BAS HPC](getting_started.md#bas-hpc)
+1. [Archer HPC](getting_started.md#archer)
+1. [Local](getting_started.md#running-locally)
 
 ## BAS HPC
 Instructions differ between bash/c shell.
@@ -46,6 +50,12 @@ With Julia installed, make sure the functions in `scripts` can be found:
 ```bash
 cd <directoryOfRepo>
 export PATH="`realpath .`/scripts/BAS:$PATH"
+
+# You will also need a version of Python to run model-ensembler
+module avail python
+
+# Choose a version of python above 3.7
+module load python/3.*
 ```
 
 You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`:
@@ -71,10 +81,9 @@ A full breakdown is provided in the [Cases page](cases.md), but in particular, p
 1. `/scripts/run_ensemble_member.j2` is the template for the script that will be sent to SLURM. Pay attention to module loading and/or exports to `$PATH`, depending on how you have installed Julia. 
 
 ### Running the ensemble
-To run your ensemble:
+Finally, to run your ensemble:
 
 ```bash
-module load python/3.*
 wavi_ensemble test_ensemble anewcase
 ```
 
