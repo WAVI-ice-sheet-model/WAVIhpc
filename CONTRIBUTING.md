@@ -12,7 +12,7 @@ Open an issue on [Github](https://github.com/alextbradley/WAVIhpc).
 If you are reporting a bug, please include:
 
 * Your operating system name and version.
-* Any details about your local setup that might be helpful in troubleshooting.
+* Any details about your local setup, or HPC platform that might be helpful in troubleshooting.
 * Detailed steps to reproduce the bug.
 
 ### Implement Features
@@ -20,8 +20,7 @@ Look through the GitHub issues for features. Anything tagged with "enhancement"
 and "help wanted" is open to whoever wants to implement it.
 
 ### Write Documentation
-The `WAVIhpc` documentation can always be improved, whether as part of the
-official docs, in docstrings, or even on the web in blog posts, articles, and such.
+The `WAVIhpc` documentation can always be improved, please feel encouraged to use the "edit this page on Github" feature.
 
 ### Add new cases
 Adding further test cases, in addition to MISMIP, MISOMIP etc. would be very welcome, and enable others to easily run your WAVI ensembling scenarios.
