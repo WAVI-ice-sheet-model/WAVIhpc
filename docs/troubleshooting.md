@@ -1,7 +1,6 @@
 # Troubleshooting
 Below is information on where to find logs for debugging, and other common issues you may run into.
 
-
 ## Logs
 
 Output logs will be written to the root of your ensemble run folders (e.g. `test_ensemble-*`).
@@ -50,7 +49,7 @@ In `ensemble/template.yaml`:
             dest:   "/data/hpcdata/users/${USER}/WAVIhpc"
 ```
 
-Is `dest:` pointing to a destination that the HPC nodes can see?
+Is `dest:` pointing to a destination that the HPC nodes can see, and that the user has write-access to?
 
 ## HPC Quotas
 BAS hpc quotas

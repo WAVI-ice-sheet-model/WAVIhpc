@@ -33,7 +33,7 @@ Checks if Julia is available, and if we are running in the root directory.
 ### `fcopy_wavi_case_a2.sh`
 
 ### `julia_install_wavi.jl`
-Install WAVI into an enviroment. Also provides the option to install a [development branch of WAVI](../advanced_usage.md#using-a-local-development-directory-of-wavi).
+Install WAVI into an enviroment. Also provides the option to install a [development branch of WAVI](../advanced_functionality.md#using-a-local-development-directory-of-wavi).
 
 ## local
 ### `wavi_install`
