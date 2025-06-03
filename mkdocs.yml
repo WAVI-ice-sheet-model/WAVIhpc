@@ -8,6 +8,8 @@ nav:
   - Troubleshooting: troubleshooting.md
   - Developer:
     - Scripts: developer/scripts.md
+    - Documentation: developer/documentation.md
+    - Contributing: developer/contributing.md
   - LICENSE: license.md
 repo_url: https://github.com/alextbradley/WAVIhpc
 repo_name: WAVIhpc
