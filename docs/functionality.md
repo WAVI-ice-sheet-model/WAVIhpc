@@ -1,4 +1,4 @@
-# Functions
+# Functionality
 ## `wavi_install`
 Installs WAVI into a Julia Environment.
 
