@@ -13,6 +13,8 @@ Firstly, set `JULIA_DEPOT_PATH` for package storage in `~/.bashrc`:
 export JULIA_DEPOT_PATH="/data/hpcdata/users/$USER/.julia:$JULIA_DEPOT_PATH"
 ```
 
+Remember to run `source ~/.bashrc`.
+
 This is where Julia packages will be installed. It is recommended the location is visible to the workstations
 (ie. under "/data"), and in an area specific to you as user.
 
