@@ -28,6 +28,21 @@ export PATH="$PATH:/path/to/<Julia directory>/bin"
 
 Inspect `/scripts/run_ensemble_member.j2` - is the script loading Julia, or pointing to the right location in `PATH`?
 
+## HPC Nodes can't find WAVI
+
+Did you call `wavi_install` before submitting the job?
+
+If you are not sure if WAVI is installed in the right place, you can check so interactively. In Julia:
+
+```julia
+import Pkg
+Pkd.add("WAVI")
+
+using WAVI
+```
+
+If you have installed WAVI, but julia cannot find it - check your `JULIA_DEPOT_PATH`.
+
 ## Can't find command `module`
 Try running:
 ```bash
