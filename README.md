@@ -7,7 +7,7 @@ Currently WAVIhpc supports execution in single mode and ensemble mode on the fol
 
 * Locally
 * BAS HPC
-* [Archer HPC](https://www.archer2.ac.uk/).
+* [Archer](https://www.archer2.ac.uk/).
 * [JASMIN](https://jasmin.ac.uk/).
 
 ## Functionality
@@ -22,8 +22,9 @@ WAVIhpc provides convenience function to help set up and run WAVI ensembles:
 WAVIhpc also provides generic templates and specific cases you can base your ensembles on:
 
 * `template`: a generic boilerplate template.
-* `template_archer`: a template set up to run ensembles on Archer.
+* `template_archer`: a template set up to run ensembles on [Archer](https://www.archer2.ac.uk/).
 * `template_bas`: a template set up to run ensembles on the BAS HPC.
+* `template_jasmin`: a template set up to run ensembles on [JASMIN](https://jasmin.ac.uk/).
 * `ATTR_666`:
 * `MISMIP_666`: [Marine Ice Sheet Model Intercomparison Project (MISMIP)](https://tc.copernicus.org/articles/14/2283/2020/)
 * `MISOMIP_666`: Marine Ice Sheet-Ocean Model Intercomparison Project (MISOMIP)

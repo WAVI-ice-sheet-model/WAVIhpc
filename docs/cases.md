@@ -41,6 +41,9 @@ The BAS template structure is identical to the boilerplate template, but there a
 
 The Archer template structure is identical to the boilerplate template, but there are changes to `ensemble/template.yaml` and `scripts/run_ensemble_member` tailored to running on the Archer HPC.
 
+## template_jasmin
+Identical to Archer, with JASMIN-specific changes to `ensemble/template.yaml` and `script/run_ensemble_member`.
+
 ## ATTR_666
 
 ## MISMIP_666

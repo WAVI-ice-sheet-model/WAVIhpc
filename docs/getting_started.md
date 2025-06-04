@@ -69,6 +69,8 @@ export PATH="`realpath .`/scripts/jasmin:$PATH"
 install_julia.sh
 ```
 
+The `install_julia.sh` will do the required directory and `PATH` setup for you.
+
 Python is loaded by default on JASMIN, so there is no need to load a Python module.
 
 You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
