@@ -41,10 +41,15 @@ export PATH="$PATH:/path/to/<Julia directory>/bin"
 
 While 1). is more convenient, the availability of modules on the BAS HPC is subject to change.
 
-Check Julia is installed:
+#### Directory setup
+With Julia installed, make sure the functions in `scripts` can be found:
+
 ```bash
-julia --version
+cd <directoryOfRepo>
+export PATH="`realpath .`/scripts/BAS:$PATH"
 ```
+
+You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`.
 
 You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
 
@@ -52,13 +57,26 @@ You can now continue setting up using the [all platform instructions](getting_st
 
 ### JASMIN
 #### Julia Installation
-Firstly, install `juliap`:
+There are no Julia modules on JASMIN, therefore we need to follow the manual installation steps.
+
+Install [Julia manually](https://julialang.org/downloads/platform/#linux_and_freebsd), and set Julia's location in PATH:
+```bash
+wget https://julialang-s3.julialang.org/bin/linux/x64/1.11/julia-1.11.5-linux-x86_64.tar.gz
+tar zxvf julia-1.11.5-linux-x86_64.tar.gz
+
+export PATH="$PATH:/path/to/<Julia directory>/bin"
+```
+Python is loaded by default on JASMIN, so there is no need to load a Python module.
+
+#### Directory setup
+With Julia installed, make sure the functions in `scripts` can be found:
 
 ```bash
-curl -fsSL https://install.julialang.org | sh
+cd <directoryOfRepo>
+export PATH="`realpath .`/scripts/jasmin:$PATH"
 ```
 
-Python is loaded by default on JASMIN, so there is no need to load a Python module.
+You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`.
 
 You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
 
@@ -75,19 +93,12 @@ You can now continue setting up using the [all platform instructions](getting_st
 
 ## All Platforms
 Check Julia is installed:
+
 ```bash
 julia --version
 ```
 
-### Run Directory and Scripts
-With Julia installed, make sure the functions in `scripts` can be found:
-
-```bash
-cd <directoryOfRepo>
-export PATH="`realpath .`/scripts/JASMIN:$PATH"
-```
-
-You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`:
+To install WAVI:
 
 ```bash
 wavi_install
