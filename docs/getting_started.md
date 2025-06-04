@@ -1,16 +1,18 @@
 # Getting Started
 
-Depending on which platform you are intending to run your ensemble, there are slightly different instructions:
+Depending on which platform you are intending to run your ensemble, there are slightly different setup instructions:
 
 1. [BAS HPC](getting_started.md#bas-hpc)
 1. [Archer HPC](getting_started.md#archer)
+1. [JASMIN](getting_started.md#jasmin)
 1. [Local](getting_started.md#running-locally)
 
-## BAS HPC
+## Platform-specific setup
+### BAS HPC
 Instructions differ between bash/c shell.
 
 === "bash"
-### Julia Installation
+#### Julia Installation
 Firstly, set `JULIA_DEPOT_PATH` for package storage in `~/.bashrc`:
 
 ```bash
@@ -44,18 +46,45 @@ Check Julia is installed:
 julia --version
 ```
 
+You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
+
+### Archer
+
+### JASMIN
+#### Julia Installation
+Firstly, install `juliap`:
+
+```bash
+curl -fsSL https://install.julialang.org | sh
+```
+
+Python is loaded by default on JASMIN, so there is no need to load a Python module.
+
+You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
+
+### Local
+Compared to running on an HPC system, running locally is more straightforward, just make sure you have
+[Julia installed](https://julialang.org/install/):
+
+```bash
+cd <directoryOfRepo>
+export PATH="`realpath .`/scripts/local:$PATH"
+```
+
+You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
+
+## All Platforms
+Check Julia is installed:
+```bash
+julia --version
+```
+
 ### Run Directory and Scripts
 With Julia installed, make sure the functions in `scripts` can be found:
 
 ```bash
 cd <directoryOfRepo>
-export PATH="`realpath .`/scripts/BAS:$PATH"
-
-# You will also need a version of Python to run model-ensembler
-module avail python
-
-# Choose a version of python above 3.7
-module load python/3.*
+export PATH="`realpath .`/scripts/JASMIN:$PATH"
 ```
 
 You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`:
@@ -93,25 +122,3 @@ Finally, to run your ensemble:
 ```bash
 wavi_ensemble test_ensemble anewcase
 ```
-
-## Archer
-
-## Running locally
-Compared to running on an HPC system, running locally is more straightforward, just make sure you have
-[Julia installed](https://julialang.org/install/):
-
-```bash
-cd <directoryOfRepo>
-export PATH="`realpath .`/scripts/local:$PATH"
-wavi_install
-
-# Run a single instance of WAVI
-wavi_create_case anewcase
-## You can edit the driver file to remove {{}} tags, we are not running on SLURM locally
-wavi_execute anewcase
-
-# Or run five WAVIs in an ensemble
-wavi_create_case anewcase
-wavi_ensemble test_ensemble anewcase
-```
-
