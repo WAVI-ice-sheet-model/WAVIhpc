@@ -1,0 +1,54 @@
+---
+ensemble:
+  vars:                 {}
+
+  pre_process:          []
+  post_process:         []
+
+  batch_config:
+    templatedir:  TEMPLATE
+    templates:
+      - input/driver.jl.j2
+      - scripts/run_ensemble_member.j2
+    email:        someone@example.com
+    job_file:     scripts/run_ensemble_member
+    cluster:      debug
+    nodes:        1
+    ntasks:       8
+    length:       00:03:00
+    maxruns:      4
+    maxjobs:      4
+
+  batches:
+    - name:       NAME
+      basedir:    ./cases
+      repeat:     True
+      pre_batch:  []
+      pre_run:
+        - name:   check
+          args:
+            cmd:  ../../scripts/jasmin/pre_run.sh /gws/nopw/j04/dit/users/${USER}/WAVIhpc
+            fail: True
+
+      runs:
+      - thickness: 100.0
+        accumulation: 0.1
+      - thickness: 100.0
+        accumulation: 0.2
+      - thickness: 100.0
+        accumulation: 0.3
+
+      post_run:
+        - name:     check
+          args:
+            cmd:    /usr/bin/test -f run/outfile.nc
+            fail:   True
+        - name:     move
+          args:
+            dest:   "/gws/nopw/j04/dit/users/${USER}/WAVIhpc"
+        - name:     remove
+      post_batch:
+        - name:     check
+          args:
+            cmd:    ../scripts/jasmin/post_batch.sh /gws/nopw/j04/dit/users/${USER}/WAVIhpc NAME
+            fail:   True
