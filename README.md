@@ -8,6 +8,7 @@ Currently WAVIhpc supports execution in single mode and ensemble mode on the fol
 * Locally
 * BAS HPC
 * [Archer HPC](https://www.archer2.ac.uk/).
+* [JASMIN](https://jasmin.ac.uk/).
 
 ## Functionality
 WAVIhpc provides convenience function to help set up and run WAVI ensembles:
