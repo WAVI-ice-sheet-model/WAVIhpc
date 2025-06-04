@@ -5,7 +5,9 @@ set -eo pipefail
 JULIAURL=${1:-"https://julialang-s3.julialang.org/bin/linux/x64/1.11/julia-1.11.5-linux-x86_64.tar.gz"}
 JULIAFILENAME=`echo $JULIAURL | sed -r 's/^.+\/([^\/]+)$/\1/'`
 JULIAVERSION=`echo $JULIAFILENAME | sed -E 's/-linux.*//'`
-WORKDIR="/gws/nopw/j04/dit/users/$USER"
+
+# Make sure you update the GWS location here
+WORKDIR="/gws/nopw/j04/<YOUR-GWS>/users/$USER"
 BIN_DIR=$WORKDIR/$JULIAVERSION/bin
 
 cd $WORKDIR
