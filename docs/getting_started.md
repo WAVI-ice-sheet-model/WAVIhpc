@@ -57,26 +57,19 @@ You can now continue setting up using the [all platform instructions](getting_st
 
 ### JASMIN
 #### Julia Installation
-There are no Julia modules on JASMIN, therefore we need to follow the manual installation steps.
+There are no Julia modules on JASMIN, therefore we have provided an installation script.
 
-Install [Julia manually](https://julialang.org/downloads/platform/#linux_and_freebsd), and set Julia's location in PATH:
-```bash
-wget https://julialang-s3.julialang.org/bin/linux/x64/1.11/julia-1.11.5-linux-x86_64.tar.gz
-tar zxvf julia-1.11.5-linux-x86_64.tar.gz
-
-export PATH="$PATH:/path/to/<Julia directory>/bin"
-```
-Python is loaded by default on JASMIN, so there is no need to load a Python module.
-
-#### Directory setup
-With Julia installed, make sure the functions in `scripts` can be found:
+This will install Julia into `/gws/nopw/j04/<YOUR-GWS>/users/$USER`. Therefore, make sure you
+edit the file to install Julia into your GWS.
 
 ```bash
 cd <directoryOfRepo>
 export PATH="`realpath .`/scripts/jasmin:$PATH"
+
+install_julia.sh
 ```
 
-You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`.
+Python is loaded by default on JASMIN, so there is no need to load a Python module.
 
 You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
 
