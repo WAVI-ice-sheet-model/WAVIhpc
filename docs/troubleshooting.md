@@ -9,7 +9,7 @@ You will also find a *run* log under `/run/proc.0.log`.
 
 ## Can't find command `wavi_install`
 Make sure you have set `export PATH="`realpath .`/scripts/local:$PATH"` in the *root* directory of 
-WAVIhpc.
+WAVIhpc. Replace `local` with the name of the platform you are running on.
 
 ## `wavi_install` can't find Julia
 Make sure you have either loaded the Julia module:
@@ -19,14 +19,14 @@ module avail julia
 module load julia-*
 ```
 
-Or, if you have manually installed Julia, point to it in `PATH`:
+Or, if you have installed Julia using `install_julia.sh`, point to it in `PATH`:
 ```bash
 export PATH="$PATH:/path/to/<Julia directory>/bin"
 ```
 
 ## HPC Nodes can't find Julia
 
-Inspect `/scripts/run_ensemble_member.j2` - is the script loading Julia, or pointing to the right location in `PATH`?
+Inspect `/scripts/run_ensemble_member.j2` - is the script loading a Julia module, or pointing to the right location in `PATH`?
 
 ## HPC Nodes can't find WAVI
 
@@ -66,6 +66,7 @@ In `ensemble/template.yaml`:
 
 Is `dest:` pointing to a destination that the HPC nodes can see, and that the user has write-access to?
 
-## HPC Quotas
-BAS hpc quotas
+## BAS HPC Quota exceeded
+`quota of x exceeds y`
 
+Check the quota you have on the BAS HPC using `myquotas`, in particular under `/data/hpcdata` (or wherever you are outputting results). Open an IT ticket to increase your quota, and adjust the limit accordingly in your `template.yaml`.
