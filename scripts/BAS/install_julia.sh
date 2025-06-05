@@ -7,7 +7,7 @@ JULIAFILENAME=`echo $JULIAURL | sed -r 's/^.+\/([^\/]+)$/\1/'`
 JULIAVERSION=`echo $JULIAFILENAME | sed -E 's/-linux.*//'`
 
 # Make sure you update the GWS location here
-WORKDIR="/gws/nopw/j04/<YOUR-GWS>/users/$USER"
+WORKDIR="/data/hpcdata/users/$USER"
 BIN_DIR=$WORKDIR/$JULIAVERSION/bin
 
 cd $WORKDIR
