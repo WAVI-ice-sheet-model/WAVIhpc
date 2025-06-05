@@ -1,9 +1,15 @@
 # Functionality
 ## `wavi_install`
-Installs WAVI into a Julia Environment.
+Installs [WAVI](https://github.com/RJArthern/WAVI.jl) into a Julia Pkg Environment.
 
 ```
 wavi_install
+```
+
+`wavi_install` can also accept an additional `--develop <path>` argument to specify a local clone of WAVI to install from:
+
+```
+wavi_install --develop ~/Documents/WAVI
 ```
 
 ## `wavi_create_case`
