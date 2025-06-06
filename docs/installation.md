@@ -5,14 +5,14 @@ It is recommended you have some familiarity of how to _use_:
 
 * [WAVI](https://rjarthern.github.io/WAVI.jl/).
 * [model-ensembler](https://model-ensembler.readthedocs.io/en/latest).
-* Running SLURM jobs on your chosen platform ([BAS HPC (internal)](https://gitlab.data.bas.ac.uk/kinton/hpc-training/-/blob/main/7%20-%20Slurm%20Scheduler.ipynb), [JASMIN LOTUS](https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/), [Archer](https://docs.archer2.ac.uk/user-guide/scheduler/)).
+* Running SLURM jobs on your chosen platform ([BAS HPC (internal)](https://gitlab.data.bas.ac.uk/kinton/hpc-training/-/blob/main/7%20-%20Slurm%20Scheduler.ipynb), [JASMIN LOTUS](https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/), [ARCHER2](https://docs.archer2.ac.uk/user-guide/scheduler/)).
 
 ## Platform-specific setup
 
 Setup and installation instructions are provided for each platform:
 
 1. [BAS HPC](installation.md#bas-hpc)
-1. [Archer HPC](installation.md#archerjasmin)
+1. [ARCHER2](installation.md#archerjasmin)
 1. [JASMIN](installation.md#archerjasmin)
 1. [Local](installation.md#local)
 
@@ -81,14 +81,14 @@ You should now be able to call the convenvience functions under `/scripts`, such
 
 You can now continue setting up using the [all platform instructions](installation.md#all-platforms) below.
 
-### Archer/JASMIN
+### ARCHER2/JASMIN
 #### Directory setup
 Make sure the functions in `scripts` can be found:
 
 ```bash
 cd <directoryOfRepo>
 
-# For Archer
+# For ARCHER2
 export PATH="`realpath .`/scripts/archer:$PATH"
 
 # For JASMIN
@@ -96,7 +96,7 @@ export PATH="`realpath .`/scripts/jasmin:$PATH"
 ```
 
 #### Julia Installation
-There are no Julia modules on JASMIN/Archer, but you can conveniently [install Julia using `juliaup`](https://julialang.org/install/):
+There are no Julia modules on JASMIN/ARCHER2, but you can conveniently [install Julia using `juliaup`](https://julialang.org/install/):
 
 ```bash
 curl -fsSL https://install.julialang.org | sh
@@ -107,7 +107,7 @@ This will automatically set up Julia for you - there are no additional steps nee
 You can now continue setting up using the [all platform instructions](installation.md#all-platforms) below.
 
 ### Local
-As with Archer/JASMIN, you can install [Julia using `juliaup`](https://julialang.org/install/).
+As with ARCHER2/JASMIN, you can install [Julia using `juliaup`](https://julialang.org/install/).
 
 Then just point to the scripts under `local` so they can be found:
 

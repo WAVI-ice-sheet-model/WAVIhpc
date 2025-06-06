@@ -42,12 +42,12 @@ The BAS template structure is identical to the boilerplate template, but there a
 
 ### template_archer
 
-The Archer template structure is identical to the boilerplate template, but there are changes to `ensemble/template.yaml` and `scripts/run_ensemble_member` tailored to running on the Archer HPC.
+The ARCHER2 template structure is identical to the boilerplate template, but there are changes to `ensemble/template.yaml` and `scripts/run_ensemble_member` tailored to running on the ARCHER2 cluster.
 
-See Archer's [running jobs documentation](https://docs.archer2.ac.uk/user-guide/scheduler/) for more information on Archer's cluster, node choices and sbatch header options.
+See ARCHER2's [running jobs documentation](https://docs.archer2.ac.uk/user-guide/scheduler/) for more information on ARCHER2's cluster, node choices and sbatch header options.
 
 ### template_jasmin
-Identical to Archer, with JASMIN-specific changes to `ensemble/template.yaml` and `script/run_ensemble_member`.
+Identical to ARCHER2, with JASMIN-specific changes to `ensemble/template.yaml` and `script/run_ensemble_member`.
 
 See JASMIN's [batch computing documentation](https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/) for more information on JASMIN's cluster, node choices and sbatch header options. 
 
@@ -57,12 +57,12 @@ See JASMIN's [batch computing documentation](https://help.jasmin.ac.uk/docs/batc
 ### MISMIP_666
 This case is intended to simulate the [Marine Ice Sheet Model Intercomparison](https://tc.copernicus.org/articles/14/2283/2020/), which you can also follow in the [WAVI documentation](https://rjarthern.github.io/WAVI.jl/examples/mismip_plus).
 
-Configured to run on Archer, MISMIP_666 contains changes to `input/driver.jl`, as well as additional files under `/scripts`: `prep_run.sh`, `rsync_jld2.sh`, `rsync_mat.sh`, `rsync.sh`, `run_repeat.sh` and `sub_run.sh`.
+Configured to run on ARCHER2, MISMIP_666 contains changes to `input/driver.jl`, as well as additional files under `/scripts`: `prep_run.sh`, `rsync_jld2.sh`, `rsync_mat.sh`, `rsync.sh`, `run_repeat.sh` and `sub_run.sh`.
 
 ### MISOMIP_666
 
 This case is intended to simulate the Marine Ice Sheet-Ocean Model Intercomparison Project (MISOMIP)
 
-Configured to run on Archer, MISOMIP_666 contains changes to `input/driver.jl`, as well as additional input data files: `bathyREAL_408.box`, `hinit400_40_24_2.box`, `hmask400_40_24_2_edit.bin`, and `Streamice_Thickness_out.data`.
+Configured to run on ARCHER2, MISOMIP_666 contains changes to `input/driver.jl`, as well as additional input data files: `bathyREAL_408.box`, `hinit400_40_24_2.box`, `hmask400_40_24_2_edit.bin`, and `Streamice_Thickness_out.data`.
 
 It also contains additional files under `/scripts`: `prep_run.sh`, `rsync.sh`, `run_repeat.sh` and `sub_run.sh`.
