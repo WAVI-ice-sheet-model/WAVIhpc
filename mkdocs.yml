@@ -1,10 +1,11 @@
 site_name: WAVIhpc
 nav:
   - Overview: index.md
-  - Getting Started: getting_started.md
-  - Functionality: functionality.md
-  - Advanced Functionality: advanced_functionality.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Advanced Usage: advanced_usage.md
   - Templates & Cases: templates_cases.md
+  - Functionality: functionality.md
   - Troubleshooting: troubleshooting.md
   - Developer:
     - Scripts: developer/scripts.md

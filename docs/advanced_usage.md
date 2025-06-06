@@ -1,4 +1,4 @@
-# Advanced Functionality
+# Advanced Usage
 
 A collection of more advanced use cases and how to approach them.
 

@@ -11,12 +11,12 @@ It is recommended you have some familiarity of how to _use_:
 
 Setup and installation instructions are provided for each platform:
 
-1. [BAS HPC](getting_started.md#bas-hpc)
-1. [Archer HPC](getting_started.md#archerjasmin)
-1. [JASMIN](getting_started.md#archerjasmin)
-1. [Local](getting_started.md#local)
+1. [BAS HPC](installation.md#bas-hpc)
+1. [Archer HPC](installation.md#archerjasmin)
+1. [JASMIN](installation.md#archerjasmin)
+1. [Local](installation.md#local)
 
-After directory setup and Julia installation, [all platforms follow common instructions](getting_started.md#all-platforms).
+After directory setup and Julia installation, [all platforms follow common instructions](installation.md#all-platforms).
 
 ### BAS HPC
 
@@ -79,7 +79,7 @@ While 1). is more convenient, the availability of modules on the BAS HPC is subj
 
 You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`.
 
-You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
+You can now continue setting up using the [all platform instructions](installation.md#all-platforms) below.
 
 ### Archer/JASMIN
 #### Directory setup
@@ -104,7 +104,7 @@ curl -fsSL https://install.julialang.org | sh
 
 This will automatically set up Julia for you - there are no additional steps needed as the installation will be visible to the HPC nodes by default.
 
-You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
+You can now continue setting up using the [all platform instructions](installation.md#all-platforms) below.
 
 ### Local
 As with Archer/JASMIN, you can install [Julia using `juliaup`](https://julialang.org/install/).
@@ -116,7 +116,7 @@ cd <directoryOfRepo>
 export PATH="`realpath .`/scripts/local:$PATH"
 ```
 
-You can now continue setting up using the [all platform instructions](getting_started.md#all-platforms) below.
+You can now continue setting up using the [all platform instructions](installation.md#all-platforms) below.
 
 ## All Platforms
 Check Julia is installed:
@@ -138,32 +138,4 @@ This will install [WAVI](https://github.com/RJArthern/WAVI.jl).
     WAVI will automatically be installed into an Pkg enviroment called `wavi_test`. As a user, you
     do not need to do anything for this to happen.
     
-    However, should you wish to install WAVI into different environments, please refer to the [advanced functionality page](advanced_functionality.md#using-a-local-development-directory-of-wavi) for guidance on how to do this.
-
-### Create an ensemble configuration
-You can use `wavi_create_case` to create a new template folder to create your ensemble:
-
-```bash
-wavi_create_case anewcase template_bas
-```
-This will create a `/cases/anewcase` folder containing `/code`, `/ensemble`, `/input`, `/run` and `/scripts`, based
-on the `/cases/template_bas` folder. 
-
-A full breakdown is provided in the [Cases page](templates_cases.md), but in particular, pay attention to the following:
-
-1. `/ensemble/template.yaml` controls the model ensemble, change directory destinations and quota as you see fit, ensuring they point to a location which is visible for the HPC nodes. Also see [model-ensembler building configuration](https://model-ensembler.readthedocs.io/en/latest/user/configuration/).
-1. `/scripts/run_ensemble_member.j2` is the template for the script that will be sent to SLURM. Pay attention to module loading and/or exports to `$PATH`, depending on how you have installed Julia. If you have installed Julia using `juliaup` (e.g. for Archer/JASMIN/local), you should not need to make any changes here.
-
-### Running the ensemble
-Finally, to run your ensemble:
-
-```bash
-wavi_ensemble test_ensemble anewcase
-```
-
-### Single execution
-You can also try running WAVI in single execution mode:
-
-```bash
-wavi_execute test_run wavi_test
-```
+    However, should you wish to install WAVI into different environments, please refer to the [advanced functionality page](advanced_usage.md#using-a-local-development-directory-of-wavi) for guidance on how to do this.
