@@ -68,7 +68,7 @@ To install/load Julia, you have a couple of options:
 module avail julia
 module load julia-*
 ```
-1. Install [Julia manually](https://julialang.org/downloads/platform/#linux_and_freebsd), and set Julia's location in PATH, using the provided `install_julia.sh` script:
+1. Install [Julia manually](https://julialang.org/downloads/platform/#linux_and_freebsd), and provided Julia's location is set in PATH, using the provided `install_julia.sh` script:
 ```bash
 cd <directoryOfRepo>
 
@@ -138,4 +138,4 @@ This will install [WAVI](https://github.com/RJArthern/WAVI.jl).
     WAVI will automatically be installed into an Pkg enviroment called `wavi_test`. As a user, you
     do not need to do anything for this to happen.
     
-    However, should you wish to install WAVI into different environments, please refer to the [advanced functionality page](advanced_usage.md#using-a-local-development-directory-of-wavi) for guidance on how to do this.
+    However, should you wish to install WAVI into different environments, please refer to the [advanced usage page](advanced_usage.md#using-a-local-development-directory-of-wavi) for guidance on how to do this.

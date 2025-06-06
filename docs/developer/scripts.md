@@ -5,10 +5,14 @@ The scripts folder contains helper functions to help install and initiate WAVI e
 ```bash
 scripts
 └── archer/jasmin
-|   ├── install_julia.sh
-|   ├── .. # Symlinks to BAS
+|   ├── fcopy_wavi_case_a2.sh # Unique to ARCHER2
+|   ├── .. # Symlinks to BAS pre_run.sh and post_batch.sh
+|   └── .. # Symlinks to local
+└── jasmin
+|   ├── .. # Symlinks to BAS pre_run.sh and post_batch.sh
 |   └── .. # Symlinks to local
 └── BAS
+|   ├── install_julia.sh # Unique to BAS HPC
 |   ├── post_batch.sh
 |   ├── pre_run.sh
 |   └── .. # Symlinks to local
@@ -18,22 +22,21 @@ scripts
 |   ├── wavi_execute
 |   └── wavi_install
 └── common.sh
-└── fcopy_wavi_case_a2.sh
 └── julia_install_wavi.jl
 ```
 
-It contains common scripts used on all platforms, `local/` scripts which contain the helper functions, 
-`BAS/` which contains symlinks to the helper functions in `local/`, and additional BAS HPC-specific scripts, and finally `archer/` which contains symlinks to `local/`, `BAS/` and additional `archer` scripts.
+It contains common scripts used on all platforms, `local/` scripts which contain the helper functions.
 
+The `BAS/` folder contains symlinks to the helper functions in `local/`, and additional BAS HPC-specific scripts.
+
+The `archer/` and `jasmin/` folders contains symlinks to `local/` and `BAS/`.
 
 ## ./
 ### `common.sh`
 Checks if Julia is available, and if we are running in the root directory.
 
-### `fcopy_wavi_case_a2.sh`
-
 ### `julia_install_wavi.jl`
-Install WAVI into an enviroment. Also provides the option to install a [development branch of WAVI](../advanced_usage.md#using-a-local-development-directory-of-wavi).
+Install WAVI into a Pkg environment. Also provides the option to install a [development branch of WAVI](../advanced_usage.md#using-a-local-development-directory-of-wavi).
 
 ## local
 Contains all functionality command scripts, which are described on the [functionality page](../functionality.md).
@@ -49,10 +52,14 @@ This is template script to demonstrate a post-batch task as part of an ensemble.
 
 It checks whether an outfile exists in the run directory.
 
-## archer
 ### `install_julia.sh`
 A helper script that installs Julia, specifically written for use on Archer.
 
 ## jasmin
-### `install_julia.sh`
-A helper script that installs Julia, specifically written for use on JASMIN.
+Simply contains symlinks to all local scripts, and BAS HPCs `pre_run.sh` and `post_batch.sh` 
+
+## archer
+As with JASMIN, but with the addition of `fcopy_wavi_case_a2.sh`.
+
+### `fcopy_wavi_case_a2.sh`
+An ARCHER2-specific script wich makes a new case by copying an old case on ARCHER2 without copying results files or unnecessary binaries.

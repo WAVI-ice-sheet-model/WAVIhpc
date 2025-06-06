@@ -26,7 +26,7 @@ The `WAVIhpc` documentation can always be improved, please feel encouraged to us
 Adding further test cases, in addition to MISMIP, MISOMIP etc. would be very welcome, and enable others to easily run your WAVI ensembling scenarios.
 
 ### Adding new platforms
-Contributing to `scripts/` to enable the templating of cases and running of ensembles on other HPC systems would be very welcome. Ideally, stay consistent with the symlinking approach from local to minimise the maintenance effort of supporting different platforms.
+Contributing to `scripts/` to enable the templating of cases and running of ensembles on additional HPC clusters would be very welcome. Ideally, stay consistent with the symlinking approach from local to minimise the maintenance effort of supporting different platforms.
 
 ### Submit Feedback
 The best way to send feedback is to [open an issue](https://github.com/alextbradley/WAVIhpc).
