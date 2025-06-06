@@ -38,12 +38,18 @@ All other cases also follow this structure. The directories contain the followin
 
 The BAS template structure is identical to the boilerplate template, but there are changes to `ensemble/template.yaml` and `scripts/run_ensemble_member` tailored to running on the BAS HPC.
 
+(BAS internal only) See the HPC training guides on [Slurm scheduling](https://gitlab.data.bas.ac.uk/kinton/hpc-training/-/blob/main/7%20-%20Slurm%20Scheduler.ipynb) and [Slurm Advanced](https://gitlab.data.bas.ac.uk/kinton/hpc-training/-/blob/main/8%20-%20Slurm%20Advanced%20.ipynb) for more information on the BAS HPC cluster, node choices and sbatch header options.
+
 ### template_archer
 
 The Archer template structure is identical to the boilerplate template, but there are changes to `ensemble/template.yaml` and `scripts/run_ensemble_member` tailored to running on the Archer HPC.
 
+See Archer's [running jobs documentation](https://docs.archer2.ac.uk/user-guide/scheduler/) for more information on Archer's cluster, node choices and sbatch header options.
+
 ### template_jasmin
 Identical to Archer, with JASMIN-specific changes to `ensemble/template.yaml` and `script/run_ensemble_member`.
+
+See JASMIN's [batch computing documentation](https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/) for more information on JASMIN's cluster, node choices and sbatch header options. 
 
 ## Use Case Templates
 ### ATTR_666

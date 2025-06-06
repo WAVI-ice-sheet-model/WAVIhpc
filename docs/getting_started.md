@@ -1,17 +1,27 @@
 # Getting Started
+## Pre-requisites
 
-Depending on which platform you are intending to run your ensemble, there are slightly different setup instructions:
+It is recommended you have some familiarity of how to _use_:
+
+* [WAVI](https://rjarthern.github.io/WAVI.jl/).
+* [model-ensembler](https://model-ensembler.readthedocs.io/en/latest).
+* Running SLURM jobs on your chosen platform ([BAS HPC (internal)](https://gitlab.data.bas.ac.uk/kinton/hpc-training/-/blob/main/7%20-%20Slurm%20Scheduler.ipynb), [JASMIN LOTUS](https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/), [Archer](https://docs.archer2.ac.uk/user-guide/scheduler/)).
+
+## Platform-specific setup
+
+Setup and installation instructions are provided for each platform:
 
 1. [BAS HPC](getting_started.md#bas-hpc)
 1. [Archer HPC](getting_started.md#archerjasmin)
 1. [JASMIN](getting_started.md#archerjasmin)
 1. [Local](getting_started.md#local)
 
-## Platform-specific setup
+After directory setup and Julia installation, [all platforms follow common instructions](getting_started.md#all-platforms).
+
 ### BAS HPC
 
 #### Directory setup
-Instructions differ between bash/c shell.
+Depending on the default shell you wish to use (bash or c shell), instructions differ slightly:
 
 === "bash"
 
@@ -149,4 +159,11 @@ Finally, to run your ensemble:
 
 ```bash
 wavi_ensemble test_ensemble anewcase
+```
+
+### Single execution
+You can also try running WAVI in single execution mode:
+
+```bash
+wavi_execute test_run wavi_test
 ```
