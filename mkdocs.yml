@@ -4,7 +4,7 @@ nav:
   - Getting Started: getting_started.md
   - Functionality: functionality.md
   - Advanced Functionality: advanced_functionality.md
-  - Cases: cases.md
+  - Templates & Cases: templates_cases.md
   - Troubleshooting: troubleshooting.md
   - Developer:
     - Scripts: developer/scripts.md
