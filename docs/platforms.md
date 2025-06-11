@@ -52,5 +52,5 @@ Recommended reading:
 1. [Batch computing](https://help.jasmin.ac.uk/docs/batch-computing/).
 1. [Introduction to group workspaces](https://help.jasmin.ac.uk/docs/short-term-project-storage/introduction-to-group-workspaces/).
 
-## Run on ARCHER2, store JASMIN
+## Run on ARCHER2, store on JASMIN
 As you have read above, ARCHER2's compute is more powerful while JASMIN's storage is more versatile - you can choose to combine these, by following the [Transfers from ARCHER2](https://help.jasmin.ac.uk/docs/data-transfer/transfers-from-archer2/#available-transfer-methods) documentation.
