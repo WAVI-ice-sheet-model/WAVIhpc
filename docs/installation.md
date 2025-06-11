@@ -11,12 +11,37 @@ It is recommended you have some familiarity of how to _use_:
 
 Setup and installation instructions are provided for each platform:
 
-1. [BAS HPC](installation.md#bas-hpc)
 1. [ARCHER2](installation.md#archer2jasmin)
 1. [JASMIN](installation.md#archer2jasmin)
+1. [BAS HPC](installation.md#bas-hpc)
 1. [Local](installation.md#local)
 
 After directory setup and Julia installation, [all platforms follow common instructions](installation.md#all-platforms).
+
+### ARCHER2/JASMIN
+#### Directory setup
+Make sure the functions in `scripts` can be found:
+
+```bash
+cd <directoryOfRepo>
+
+# For ARCHER2
+export PATH="`realpath .`/scripts/archer:$PATH"
+
+# For JASMIN
+export PATH="`realpath .`/scripts/jasmin:$PATH"
+```
+
+#### Julia Installation
+There are no Julia modules on JASMIN/ARCHER2, but you can conveniently [install Julia using `juliaup`](https://julialang.org/install/):
+
+```bash
+curl -fsSL https://install.julialang.org | sh
+```
+
+This will automatically set up Julia for you - there are no additional steps needed as the installation will be visible to the HPC nodes by default.
+
+You can now continue setting up using the [all platform instructions](installation.md#all-platforms) below.
 
 ### BAS HPC
 
@@ -77,32 +102,19 @@ install_julia.sh
 
 While 1). is more convenient, the availability of modules on the BAS HPC is subject to change.
 
+!!! note "Where is Julia?"
+
+    Just installing Julia using `juliaup` would be the easiest thing to do. Unfortunately **at present**, whether this works or not depends entirely on which node you are attempting to run Julia on.
+
+    This is because some nodes (currently the centos based ones) configure `$HOME` to `/users/<USER>`, rather than /`data/hpcdata/users/<USER>, even though this is not a visible directory for the node.
+
+    Therefore, if `$HOME` changes between the workstation you submit from (e.g. `/users/<USER>`) and the node you submit to (e.g. `/data/hpcdata/users/thozwa`) `juliaup` will break. Currently, the combination of `install_julia.sh` and the scripts submitted to SLURM in `template_bas/` set `$HOME` manually for you.
+
+    While using a rocky workstation (e.g. `bsl-ws-s10`) and submitting to the rocky partition, `juliaup` can be used without issues.
+
+    Ideally, in the (near) future, all workstations and nodes will be rocky based, and these instructions can be simplified.
+
 You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`.
-
-You can now continue setting up using the [all platform instructions](installation.md#all-platforms) below.
-
-### ARCHER2/JASMIN
-#### Directory setup
-Make sure the functions in `scripts` can be found:
-
-```bash
-cd <directoryOfRepo>
-
-# For ARCHER2
-export PATH="`realpath .`/scripts/archer:$PATH"
-
-# For JASMIN
-export PATH="`realpath .`/scripts/jasmin:$PATH"
-```
-
-#### Julia Installation
-There are no Julia modules on JASMIN/ARCHER2, but you can conveniently [install Julia using `juliaup`](https://julialang.org/install/):
-
-```bash
-curl -fsSL https://install.julialang.org | sh
-```
-
-This will automatically set up Julia for you - there are no additional steps needed as the installation will be visible to the HPC nodes by default.
 
 You can now continue setting up using the [all platform instructions](installation.md#all-platforms) below.
 
