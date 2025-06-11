@@ -18,7 +18,7 @@ Below is a comparison table of usage and hardware specification of the different
 | **Memory per Node**     | 256 GB to 512 GB (standard nodes)                                 | 256 GB to 1024 GB (depending on host group)                       | 512 GB |
 
 ## ARCHER2
-ARCHER2 is the National HPC service for compute-intensive research for ESPRC + NERC funded research. You can read more about its [storage types](https://docs.archer2.ac.uk/user-guide/io/#achieving-efficient-io) and [hardware specifications](https://docs.archer2.ac.uk/user-guide/hardware/).
+[ARCHER2](https://www.archer2.ac.uk/about/) is the National HPC service for compute-intensive research for ESPRC + NERC funded research. You can read more about its [storage types](https://docs.archer2.ac.uk/user-guide/io/#achieving-efficient-io) and [hardware specifications](https://docs.archer2.ac.uk/user-guide/hardware/).
 
 ARCHER2 is the most powerful HPC supported by WAVIhpc, and therefore well-suited to the most compute-intensive ensembles.
 
