@@ -12,8 +12,8 @@ It is recommended you have some familiarity of how to _use_:
 Setup and installation instructions are provided for each platform:
 
 1. [BAS HPC](installation.md#bas-hpc)
-1. [ARCHER2](installation.md#archerjasmin)
-1. [JASMIN](installation.md#archerjasmin)
+1. [ARCHER2](installation.md#archer2jasmin)
+1. [JASMIN](installation.md#archer2jasmin)
 1. [Local](installation.md#local)
 
 After directory setup and Julia installation, [all platforms follow common instructions](installation.md#all-platforms).

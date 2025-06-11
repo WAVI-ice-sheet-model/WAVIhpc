@@ -4,8 +4,9 @@ nav:
   - Installation: installation.md
   - Usage: usage.md
   - Advanced Usage: advanced_usage.md
-  - Templates & Cases: templates_cases.md
   - Functionality: functionality.md
+  - Templates & Cases: templates_cases.md
+  - Platforms: platforms.md
   - Troubleshooting: troubleshooting.md
   - Developer:
     - Scripts: developer/scripts.md

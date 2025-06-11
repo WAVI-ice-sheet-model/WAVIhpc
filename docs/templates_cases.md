@@ -3,6 +3,9 @@
 Below is a breakdown of the different templates and use cases that are provided in WAVIhpc.
 
 ## Platform Templates
+
+Not sure which platform to use? See the section on [platforms](platforms.md).
+
 ### template
 
 The `template` case is the boilerplate template on which all other templates are based.
