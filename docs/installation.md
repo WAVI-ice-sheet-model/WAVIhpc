@@ -146,7 +146,7 @@ wavi_install
 This will install [WAVI](https://github.com/RJArthern/WAVI.jl).
 
 ### Development Branches
-#### Local development directory
+#### Local branch
 `wavi_install` can accept an additional `--develop <path>` argument to specify your local clone of WAVI to install from.
 
 ```bash
@@ -167,4 +167,4 @@ Then call `wavi_install` as normal.
     WAVI will automatically be installed into an Pkg enviroment called `wavi_test`. As a user, you
     do not need to do anything for this to happen.
     
-    However, should you wish to install WAVI into different environments, please refer to the [advanced usage page](advanced_usage.md#using-a-local-development-directory-of-wavi) for guidance on how to do this.
+    However, should you wish to install WAVI into different environments, please refer to the [advanced usage page](advanced_usage.md#using-different-pkg-environments-for-different-experimentsruns) for guidance on how to do this.
