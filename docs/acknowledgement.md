@@ -1,5 +1,5 @@
 # Acknowledgement
-Developed and maintained by:
+Developed by:
 
 * Alex Bradley (@alextbradley)
 * James Byrne (@JimCircadian)
