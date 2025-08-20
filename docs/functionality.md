@@ -1,6 +1,6 @@
 # Functionality
 ## `wavi_install`
-Installs [WAVI](https://github.com/RJArthern/WAVI.jl) into a Julia Pkg Environment.
+Installs [WAVI](https://github.com/WAVI-ice-sheet-model/WAVI.jl) into a Julia Pkg Environment.
 
 ```
 wavi_install

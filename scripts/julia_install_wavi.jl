@@ -7,7 +7,7 @@ env_name = "WAVI_ENV" in keys(ENV) ? ENV["WAVI_ENV"] : "wavi_test"
 Pkg.activate(joinpath("envs", env_name))
 
 repo = "WAVI_REPO" in keys(ENV) ? ENV["WAVI_REPO"] :
-    "https://github.com/RJArthern/WAVI.jl.git"
+    "https://github.com/WAVI-ice-sheet-model/WAVI.jl.git"
 rev = "WAVI_REV" in keys(ENV) ? ENV["WAVI_REV"] : "main"
 
 dev_folder = nothing
