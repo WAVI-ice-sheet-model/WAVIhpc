@@ -3,7 +3,7 @@
 
 It is recommended you have some familiarity of how to _use_:
 
-* [WAVI](https://rjarthern.github.io/WAVI.jl/).
+* [WAVI](https://WAVI-ice-sheet-model.github.io/WAVI.jl/).
 * [model-ensembler](https://model-ensembler.readthedocs.io/en/latest).
 * Running SLURM jobs on your chosen platform ([BAS HPC (internal)](https://gitlab.data.bas.ac.uk/kinton/hpc-training/-/blob/main/7%20-%20Slurm%20Scheduler.ipynb), [JASMIN LOTUS](https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/), [ARCHER2](https://docs.archer2.ac.uk/user-guide/scheduler/)).
 
@@ -143,7 +143,7 @@ To install WAVI:
 wavi_install
 ```
 
-This will install [WAVI](https://github.com/RJArthern/WAVI.jl).
+This will install [WAVI](https://github.com/WAVI-ice-sheet-model/WAVI.jl).
 
 !!! note "Pkg environments"
 

@@ -33,7 +33,7 @@ All other cases also follow this structure. The directories contain the followin
 
 * `/code`: Empty in templates, but could contain additional (e.g. Julia) code required to run your ensemble.
 * `/ensemble`: Contains a [model-ensembler configuration](https://model-ensembler.readthedocs.io/en/latest/user/configuration/) file, `template.yaml`.
-* `/input`: Contains input files, in this case `driver.jl`/`driver.jl.j2`, files which instantiate, configure and run the WAVI simulation. Also see [WAVI API Overview](https://rjarthern.github.io/WAVI.jl/data_structure/overview/).
+* `/input`: Contains input files, in this case `driver.jl`/`driver.jl.j2`, files which instantiate, configure and run the WAVI simulation. Also see [WAVI API Overview](https://WAVI-ice-sheet-model.github.io/WAVI.jl/data_structure/overview/).
 * `/run`: An empty folder, which will contain output files for each run.
 * `/scripts`: Contains scripts `prep_run`, `run_driver.jl`, `run_ensemble_member`/`run_ensemble_member.j2`, whose execution are configured by `/ensemble/template.yaml`
 
@@ -58,7 +58,7 @@ See JASMIN's [batch computing documentation](https://help.jasmin.ac.uk/docs/batc
 ### ATTR_666
 
 ### MISMIP_666
-This case is intended to simulate the [Marine Ice Sheet Model Intercomparison](https://tc.copernicus.org/articles/14/2283/2020/), which you can also follow in the [WAVI documentation](https://rjarthern.github.io/WAVI.jl/examples/mismip_plus).
+This case is intended to simulate the [Marine Ice Sheet Model Intercomparison](https://tc.copernicus.org/articles/14/2283/2020/), which you can also follow in the [WAVI documentation](https://WAVI-ice-sheet-model.github.io/WAVI.jl/examples/mismip_plus).
 
 Configured to run on ARCHER2, MISMIP_666 contains changes to `input/driver.jl`, as well as additional files under `/scripts`: `prep_run.sh`, `rsync_jld2.sh`, `rsync_mat.sh`, `rsync.sh`, `run_repeat.sh` and `sub_run.sh`.
 
