@@ -104,11 +104,11 @@ While 1. is more convenient, the availability of modules on the BAS HPC is subje
 
 !!! note "Where is Julia?"
 
-    Just installing Julia using `juliaup` would be the easiest thing to do. Unfortunately **at present**, whether this works or not depends entirely on which node you are attempting to run Julia on.
+    Just installing Julia using `juliaup` (see the ARCHER2/JASMIN instructions) would be the easiest thing to do. Unfortunately **at present**, whether this works or not depends entirely on which node you are attempting to run Julia on.
 
     This is because some nodes (currently the Centos based ones) configure `$HOME` to `/users/<USER>`, rather than `/data/hpcdata/users/<USER>`, even though this is not a visible directory for the node.
 
-    Therefore, if `$HOME` changes between the workstation you submit from (e.g. `/users/<USER>`) and the node you submit to (e.g. `/data/hpcdata/users/thozwa`) `juliaup` will break. Currently, the combination of `install_julia.sh` and the scripts submitted to SLURM in `template_bas/` set `$HOME` manually for you.
+    Therefore, if `$HOME` changes between the workstation you submit from (e.g. `/users/<USER>`) and the node you submit to (e.g. `/data/hpcdata/users/<USER>`) `juliaup` will break. Currently, the combination of `install_julia.sh` and the scripts submitted to SLURM in `template_bas/` set `$HOME` manually for you.
 
     While using a Rocky workstation (e.g. `bsl-ws-s10`) and submitting to the Rocky partition, `juliaup` can be used for Julia installation, and will run on the node without issues.
 
@@ -145,9 +145,26 @@ wavi_install
 
 This will install [WAVI](https://github.com/WAVI-ice-sheet-model/WAVI.jl).
 
+### Development Branches
+#### Local branch
+`wavi_install` can accept an additional `--develop <path>` argument to specify your local clone of WAVI to install from.
+
+```bash
+wavi_install --develop /data/hpcdata/users/<USER>/WAVI
+```
+
+#### Remote branch
+If you want to install a remote branch of the [WAVI](https://github.com/RJArthern/WAVI.jl) repository, you can do so with the following commands:
+
+```bash
+export WAVI_REPO="https://github.com/RJArthern/WAVI.jl"
+export WAVI_REV="branch-name"
+```
+Then call `wavi_install` as normal.
+
 !!! note "Pkg environments"
 
     WAVI will automatically be installed into an Pkg enviroment called `wavi_test`. As a user, you
     do not need to do anything for this to happen.
     
-    However, should you wish to install WAVI into different environments, please refer to the [advanced usage page](advanced_usage.md#using-a-local-development-directory-of-wavi) for guidance on how to do this.
+    However, should you wish to install WAVI into different environments, please refer to the [advanced usage page](advanced_usage.md#using-different-pkg-environments-for-different-experimentsruns) for guidance on how to do this.

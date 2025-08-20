@@ -13,6 +13,7 @@ nav:
     - Documentation: developer/documentation.md
     - Contributing: developer/contributing.md
   - LICENSE: license.md
+  - Acknowledgment: acknowledgement.md
 repo_url: https://github.com/alextbradley/WAVIhpc
 repo_name: WAVIhpc
 edit_uri: edit/main/docs/

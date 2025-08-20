@@ -36,7 +36,7 @@ The `archer/` and `jasmin/` folders contains symlinks to `local/` and `BAS/`.
 Checks if Julia is available, and if we are running in the root directory.
 
 ### `julia_install_wavi.jl`
-Install WAVI into a Pkg environment. Also provides the option to install a [development branch of WAVI](../advanced_usage.md#using-a-local-development-directory-of-wavi).
+Install WAVI into a Pkg environment. Also provides the option to install a [development branch of WAVI](../advanced_usage.md#using-different-pkg-environments-for-different-experimentsruns).
 
 ## local
 Contains all functionality command scripts, which are described on the [functionality page](../functionality.md).
