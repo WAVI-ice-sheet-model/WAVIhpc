@@ -92,7 +92,7 @@ To install/load Julia, you have a few options:
 ```shell
 curl -fsSL https://install.julialang.org | sh
 ```
-Choose `custom installation`, and make sure juliaup is installed in the following location `/data/hpcdata/users/<USER>/.juliaup`. All other settings can be set as their default.
+Choose `custom installation`, and make sure juliaup is installed in the following location: `/data/hpcdata/users/<USER>/.juliaup`. All other settings can be set as their default.
 1. Load the Julia module that is available on the HPC:
 ```shell
 module avail julia
