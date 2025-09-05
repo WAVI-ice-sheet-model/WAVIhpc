@@ -70,3 +70,15 @@ Is `dest:` pointing to a destination that the HPC nodes can see, and that the us
 `quota of x exceeds y`
 
 Check the quota you have on the BAS HPC using `myquotas`, in particular under `/data/hpcdata` (or wherever you are outputting results). Open an IT ticket to increase your quota, and adjust the limit accordingly in your `template.yaml`.
+
+## `juliaup` can't find the right channel
+Run `juliaup status`, is a default channel set?
+
+If not:
+
+```shell
+juliaup add release
+juliaup default release
+```
+
+If this does not resolve the issue, you may be attempting to run julia in an environment with multiple _source_ of julia installation. Try replacing calls of `julia` in your scripts with the exact julia executable provided by juliaup: `/data/hpcdata/users/$USER/.juliaup/bin/julia`.

@@ -86,13 +86,19 @@ Depending on the default shell you wish to use (bash or c shell), instructions d
 This is where Julia packages will be installed. It is recommended the location is visible to the workstations
 (ie. under "/data"), and in an area specific to you as user.
 
-To install/load Julia, you have a couple of options:
+To install/load Julia, you have a few options:
 
+1. Using [juliaup](https://julialang.org/install/) (**recommended**):
+```shell
+curl -fsSL https://install.julialang.org | sh
+```
+Choose `custom installation`, and make sure juliaup is installed in the following location: `/data/hpcdata/users/<USER>/.juliaup`. All other settings can be set as their default.
 1. Load the Julia module that is available on the HPC:
 ```shell
 module avail julia
 module load julia-*
 ```
+Note that the availability of modules on the BAS HPC is subject to change.
 1. Install [Julia manually](https://julialang.org/downloads/platform/#linux_and_freebsd), and provided Julia's location is set in PATH, using the provided `install_julia.sh` script:
 ```bash
 cd <directoryOfRepo>
@@ -100,11 +106,9 @@ cd <directoryOfRepo>
 install_julia.sh
 ```
 
-While 1. is more convenient, the availability of modules on the BAS HPC is subject to change.
-
 !!! note "Where is Julia?"
 
-    Just installing Julia using `juliaup` (see the ARCHER2/JASMIN instructions) would be the easiest thing to do. Unfortunately **at present**, whether this works or not depends entirely on which node you are attempting to run Julia on.
+    Just installing Julia using `juliaup` would be the easiest thing to do. Unfortunately **at present**, whether this works out of the box or not depends entirely on which node you are attempting to run Julia on.
 
     This is because some nodes (currently the Centos based ones) configure `$HOME` to `/users/<USER>`, rather than `/data/hpcdata/users/<USER>`, even though this is not a visible directory for the node.
 
@@ -112,7 +116,7 @@ While 1. is more convenient, the availability of modules on the BAS HPC is subje
 
     While using a Rocky workstation (e.g. `bsl-ws-s10`) and submitting to the Rocky partition, `juliaup` can be used for Julia installation, and will run on the node without issues.
 
-    Ideally, in the (near) future, all workstations and nodes will be Rocky based, and these instructions can be simplified.
+    In the (near) future, all workstations and nodes will be Rocky based, and these instructions can be simplified.
 
 You should now be able to call the convenvience functions under `/scripts`, such as `wavi_install`.
 

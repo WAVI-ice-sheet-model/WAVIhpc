@@ -12,7 +12,7 @@ Currently WAVIhpc supports execution in single mode and ensemble mode on the fol
 
 ## Installation and Usage
 Because installation instructions differ slightly between platforms, please refer to the
-installation instructions in our documentation (hosting link TBC).
+installation instructions in our [documentation](https://wavi-ice-sheet-model.github.io/WAVIhpc/).
 
 ## Functionality
 WAVIhpc provides convenience function to help set up and run WAVI ensembles:
@@ -34,6 +34,10 @@ WAVIhpc also provides generic templates and specific cases you can base your ens
 * `MISOMIP_666`: Marine Ice Sheet-Ocean Model Intercomparison Project (MISOMIP).
 
 ## Authors and Acknowledgement
+This repository was created by Alex Bradley.
+
+It has also been developed and maintained by James Byrne and Thomas Zwagerman.
+
 [![](https://contrib.rocks/image?repo=alextbradley/WAVIhpc)](https://github.com/alextbradley/WAVIhpc/graphs/contributors)
 
 ## License
