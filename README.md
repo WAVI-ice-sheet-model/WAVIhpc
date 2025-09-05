@@ -12,7 +12,7 @@ Currently WAVIhpc supports execution in single mode and ensemble mode on the fol
 
 ## Installation and Usage
 Because installation instructions differ slightly between platforms, please refer to the
-installation instructions in our documentation (hosting link TBC).
+installation instructions in our [documentation](https://wavi-ice-sheet-model.github.io/WAVIhpc/).
 
 ## Functionality
 WAVIhpc provides convenience function to help set up and run WAVI ensembles:
