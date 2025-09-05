@@ -34,6 +34,10 @@ WAVIhpc also provides generic templates and specific cases you can base your ens
 * `MISOMIP_666`: Marine Ice Sheet-Ocean Model Intercomparison Project (MISOMIP).
 
 ## Authors and Acknowledgement
+This repository was created by Alex Bradley.
+
+It has also been developed and maintained by James Byrne and Thomas Zwagerman.
+
 [![](https://contrib.rocks/image?repo=alextbradley/WAVIhpc)](https://github.com/alextbradley/WAVIhpc/graphs/contributors)
 
 ## License
