@@ -3,9 +3,8 @@
 if [ $# -lt 1 ]; then
   echo "Usage $0 <ensembleName> [caseDirectory] [additional_model_ensemble_args...]"
   echo "Examples:"
-  echo "  $0 my_ensemble template_bas --dry-run -vv"
+  echo "  $0 my_ensemble template_bas"
   echo "  $0 my_ensemble MISMIP_666 --pickup --skips 10"
-  echo "  $0 my_ensemble template --dry-run"
   exit 1
 fi
 
