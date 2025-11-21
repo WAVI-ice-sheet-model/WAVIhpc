@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 if [ $# -lt 1 ]; then
-  echo "Usage $0 <ensembleName> [ensembleTemplateCase]"
+  echo "Usage $0 <ensembleName> [caseDirectory] [additional_model_ensemble_args...]"
+  echo "Examples:"
+  echo "  $0 my_ensemble template_bas --dry-run -vv"
+  echo "  $0 my_ensemble MISMIP_666 --pickup --skips 10"
+  echo "  $0 my_ensemble template --dry-run"
   exit 1
 fi
 
@@ -27,6 +31,11 @@ CFG_DIR="`dirname $0`"
 ENSEMBLE_TARGET="slurm"
 ENSEMBLE_NAME="${1}"
 ENSEMBLE_TEMPLATE_CASE="${2:-template}"
+
+# All arguments after the first two are extra args for model_ensemble
+shift 2
+EXTRA_ARGS=("$@")
+
 ENSEMBLE_CONFIG="cases/${ENSEMBLE_TEMPLATE_CASE}/ensemble/${ENSEMBLE_NAME}.yaml"
 if [ "$ENSEMBLE_TYPE" == "local" ]; then
   ENSEMBLE_TARGET="dummy"
@@ -38,6 +47,8 @@ sed -r \
   cases/$ENSEMBLE_TEMPLATE_CASE/ensemble/template.yaml \
   >${ENSEMBLE_CONFIG}
 
-model_ensemble -ms 30 -ct 30 -st 20 -rt 120 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET
+# Run model_ensemble with default parameters, config, target, and extra args at the end
+echo "Running: model_ensemble -ms 30 -ct 30 -st 20 -rt 120 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET ${EXTRA_ARGS[*]}"
+model_ensemble -ms 30 -ct 30 -st 20 -rt 120 -p -v ${ENSEMBLE_CONFIG} $ENSEMBLE_TARGET "${EXTRA_ARGS[@]}"
 
 exit $?
