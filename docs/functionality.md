@@ -30,13 +30,18 @@ Sets up the Python environment, installs model-ensembler and calls `model_ensemb
 
 ```
 # Usage
-wavi_ensemble <ensemble-name> <case-template>
+wavi_ensemble <ensemble-name> <case-template> [additional_model_ensemble_args...]
 
-# Example
+# Examples
 wavi_ensemble test_ensemble anewcase
+wavi_ensemble my_ensemble template_bas --dry-run
+wavi_ensemble my_ensemble MISMIP_666 --pickup --skips 10
 ```
 
-Where the first argument is a name you want to give your ensemble, and the second argument is the cases folder you have configured it in.
+Where:
+- The first argument is a name you want to give your ensemble
+- The second argument is the cases folder you have configured (defaults to "template" if not specified)
+- Any additional arguments are passed directly to the underlying `model_ensemble` command. You can check `model_ensemble --help` for these arguments.
 
 ## `wavi_execute`
 Provides a single execution command for WAVI:

@@ -19,7 +19,7 @@ WAVIhpc provides convenience function to help set up and run WAVI ensembles:
 
 * `wavi_install`: Installs WAVI into a Julia environment.
 * `wavi_create_case`: Creates a new ensembling case based on a provided template.
-* `wavi_ensemble`: Runs a WAVI ensemble.
+* `wavi_ensemble`: Runs a WAVI ensemble, with optional extra parameters passed to model_ensemble.
 * `wavi_execute`: Runs a single execution of WAVI (ie not an ensemble).
 
 ## Templates and Use Cases

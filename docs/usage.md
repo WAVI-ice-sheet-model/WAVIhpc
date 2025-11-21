@@ -20,6 +20,14 @@ Finally, to run your ensemble:
 wavi_ensemble test_ensemble anewcase
 ```
 
+You can pass additional parameters to the underlying `model_ensemble` command by adding them after the case template:
+
+```bash
+wavi_ensemble my_ensemble MISMIP_666 --pickup --skips 10
+```
+
+The extra parameters are passed directly to `model_ensemble` at the end of the command, after the configuration file and target. Run `model_ensemble --help` to see all parameter options.
+
 ## Single execution
 You can also try running WAVI in single execution mode:
 
