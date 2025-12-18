@@ -24,5 +24,5 @@ wavi_ensemble test_ensemble anewcase
 You can also try running WAVI in single execution mode:
 
 ```bash
-wavi_execute test_run wavi_test
+wavi_execute anewcase wavi_test
 ```
